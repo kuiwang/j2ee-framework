@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/jdbc 
+	http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+	http://www.directwebremoting.org/schema/spring-dwr
+    http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
+	<context:annotation-config/>
+	
+	<import resource="spring-jcaptcha.xml"/>
+	<import resource="spring-data-jpa.xml"/>
+	<import resource="spring-hibernate.xml"/>
+	<import resource="spring-ibatis.xml"/>
+	<import resource="spring-jdbc.xml"/>
+	<import resource="spring-mvc-dwr.xml"/>
+	<import resource="spring-mvc-servlet.xml"/>
+	<import resource="spring-mybatis.xml"/>
+	<import resource="spring-struts.xml"/>
+	<import resource="spring-struts2-servlet.xml"/>
+	<!-- <import resource="applicationContext-security.xml"/> --> 
+	<!-- <import resource="applicationContext-shiro.xml"/>  -->
+	<import resource="spring-jax-ws-servlet.xml"/> 
+	<import resource="spring-xfire-servlet.xml"/> 
+	<import resource="spring-cxf-servlet.xml"/> 
+	
+	<!-- spring jdbc ibatis  mybatis初始化数据导入 -->
+	<jdbc:initialize-database data-source="ibatisDataSource">
+ 		<jdbc:script location="classpath:jdbc_ibatis_mybatis.sql" encoding="UTF-8"/>
+ 	</jdbc:initialize-database>
+	
+	<!-- Hibernate4初始化数据导入 -->
+	<jdbc:initialize-database data-source="hibernate4DataSource">
+ 		<jdbc:script location="classpath:Hibernate4.sql" encoding="UTF-8"/>
+ 	</jdbc:initialize-database>
+		
+</beans>

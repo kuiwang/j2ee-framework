@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="helloWorldForm" type="com.fengjing.framework.struts.form.HelloWorldForm" />
+	</form-beans>
+
+	<action-mappings>
+		<!--  
+			方法一:DelegatingActionProxy
+			<action path="/helloWorld" type="org.springframework.web.struts.DelegatingActionProxy"
+				name="helloWorldForm">
+				<forward name="success" path="/HelloWorld.jsp" />
+			</action>
+			
+			<bean name="/helloWorld" class="com.fengjing.framework.struts.action.HelloWorldAction" scope="prototype" autowire="byName"/>
+		-->
+		
+		<!-- 
+			方法二:设置controller 覆盖processorClass为org.springframework.web.struts.DelegatingRequestProcessor
+		-->
+		<action path="/helloWorld" 
+				type="com.fengjing.framework.struts.action.HelloWorldAction"
+				name="helloWorldForm">
+			<forward name="success" path="/HelloWorld.jsp" />
+		</action>
+		
+	</action-mappings>
+	
+	<controller>  
+		<set-property property="processorClass" value="org.springframework.web.struts.DelegatingRequestProcessor"/>
+	</controller>
+</struts-config>

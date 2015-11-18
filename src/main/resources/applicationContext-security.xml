@@ -1,0 +1,199 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/jdbc 
+	http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+ 	
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    
+ 	<!-- 扫描注入com.fengjing.framework.spring.security包下仅包含@Controller注解的bean -->
+	<context:component-scan base-package="com.fengjing.framework.spring.security">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+ 	
+	<!-- Spring Security DataSource数据源 -->
+	<beans:bean id="securitydataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="username" value="${username}"></beans:property>
+		<beans:property name="password" value="${password}"></beans:property>
+		<beans:property name="url" value="${security.log4jdbc.jdbc.url}"></beans:property>
+		<beans:property name="driverClassName" value="${log4jdbc.driverClassName}"></beans:property>
+	</beans:bean>
+	
+	<!-- Spring Security初始化数据导入 -->
+	<jdbc:initialize-database data-source="securitydataSource">
+ 		<jdbc:script location="classpath:spring_security.sql" encoding="UTF-8"/>
+ 	</jdbc:initialize-database>
+	
+ 	<beans:bean id="securityjdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+ 		<beans:property name="dataSource" ref="securitydataSource"></beans:property>
+ 	</beans:bean>
+ 	
+ 	<!-- 
+ 		参见org.springframework.security.access.vote.AuthenticatedVoter
+ 		IS_AUTHENTICATED_ANONYMOUSLY匿名用户也可以访问
+ 		IS_AUTHENTICATED_FULLY 通过认证的用户可以访问
+ 		IS_AUTHENTICATED_REMEMBERED 使用rember功能的用户可以访问
+ 	-->
+ 	
+ 	<!-- 1、使用xml配置文件 -->
+ 	<!--  
+	<http auto-config="true" access-denied-page="/403.jsp">
+		<intercept-url pattern="/login.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/loginfailed.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/logout.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		
+		<intercept-url pattern="/admin*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED" />
+		
+		<form-login login-page="/login.do" authentication-failure-url="/loginfailed.do"/>
+		<logout logout-success-url="/logout.do" delete-cookies="JSESSIONID" invalidate-session="true"/>
+		<remember-me key="spring_security"/>
+	</http>
+ 
+	<authentication-manager>
+	  <authentication-provider>
+	  	<password-encoder hash="md5"></password-encoder>
+	    <user-service>
+		<user name="admin" password="e10adc3949ba59abbe56e057f20f883e" authorities="ROLE_USER" />
+		<user name="sysadmin" password="e10adc3949ba59abbe56e057f20f883e" authorities="ROLE_ADMIN" />
+	    </user-service>
+	  </authentication-provider>
+	</authentication-manager>
+ 	-->
+ 	
+ 	<!-- 2、使用user-service -->
+ 	<http auto-config="true" access-denied-page="/WEB-INF/views/error/403.jsp">
+ 		
+ 		<!-- webservice匿名访问  -->
+ 		<!--  
+ 	    <intercept-url pattern="/service/hello**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 	    <intercept-url pattern="/remote/service**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 	    <intercept-url pattern="/*.ws**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 	    <intercept-url pattern="/ws/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 	    <intercept-url pattern="/sws/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 	    -->
+ 	    
+ 	    <!-- 需要admin权限访问 -->
+ 	    <intercept-url pattern="/druid/**" access="IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED,ROLE_ADMIN" />
+ 	    <intercept-url pattern="/admin*" access="ROLE_ADMIN" />
+ 	    
+ 	    <!-- 以下资源匿名访问 -->
+ 	    <intercept-url pattern="/bootstrap/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 	    <intercept-url pattern="/login.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/loginfailed.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/logout.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		
+		<!-- 需要认证使用Remember me 的也可以访问-->
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED" /> 
+		
+		<form-login login-page="/login.do" authentication-failure-url="/loginfailed.do"/>
+		<logout logout-success-url="/logout.do" delete-cookies="JSESSIONID" invalidate-session="true"/>
+		<remember-me key="spring_security"/>
+		
+	</http>
+ 
+	<authentication-manager>
+	  	<authentication-provider user-service-ref="myUserDetailsService"></authentication-provider>
+	</authentication-manager>
+ 	
+ 	
+ 	<!-- 3、使用数据库 -->
+ 	<!-- 
+	CREATE TABLE `users` (
+	  `USER_ID` INT(10) UNSIGNED NOT NULL,
+	  `USERNAME` VARCHAR(45) NOT NULL,
+	  `PASSWORD` VARCHAR(45) NOT NULL,
+	  `ENABLED` tinyint(1) NOT NULL,
+	  PRIMARY KEY (`USER_ID`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+	CREATE TABLE `user_roles` (
+	  `USER_ROLE_ID` INT(10) UNSIGNED NOT NULL,
+	  `USER_ID` INT(10) UNSIGNED NOT NULL,
+	  `AUTHORITY` VARCHAR(45) NOT NULL,
+	  PRIMARY KEY (`USER_ROLE_ID`),
+	  KEY `FK_user_roles` (`USER_ID`),
+	  CONSTRAINT `FK_user_roles` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+	INSERT INTO spring_security.users (USER_ID, USERNAME,PASSWORD, ENABLED)
+	VALUES (100, 'admin', '123456', TRUE);
+	 
+	INSERT INTO spring_security.user_roles (USER_ROLE_ID, USER_ID,AUTHORITY)
+	VALUES (1, 100, 'ROLE_USER');
+ 	-->
+ 	<!--  
+ 	<beans:bean id="scdataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url" value="jdbc:mysql://localhost:3306/spring_security" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="" />
+    </beans:bean>
+ 	
+ 	<http auto-config="true" access-denied-page="/403.jsp">
+ 	
+		<intercept-url pattern="/login.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/loginfailed.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/logout.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		
+		<intercept-url pattern="/admin*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED" />
+		
+		<form-login login-page="/login.do" authentication-failure-url="/loginfailed.do"/>
+		<logout logout-success-url="/logout.do" delete-cookies="JSESSIONID" invalidate-session="true"/>
+		<remember-me key="spring_security"/>
+		
+	</http>
+ 
+	<authentication-manager>
+	   <authentication-provider>
+		<jdbc-user-service data-source-ref="scdataSource"
+ 
+		   users-by-username-query="
+		      select username,password, enabled 
+		      from users where username=?" 
+ 
+		   authorities-by-username-query="
+		      select u.username, ur.authority from users u, user_roles ur 
+		      where u.user_id = ur.user_id and u.username =?  " 
+		/>
+	   </authentication-provider>
+	</authentication-manager>
+ 	-->
+ 	
+ 	
+ 	<!-- 
+ 		4、使用HTTP Basic Authentication 
+ 		使用http-basic方式退出有问题 需要关闭浏览器才能正常退出或者返回HttpServletResponse.SC_UNAUTHORIZED
+ 	-->
+ 	<!--  
+ 	<http>
+ 		
+ 		<intercept-url pattern="/j_spring_security_check*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 		<intercept-url pattern="/j_spring_security_logout*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 		<intercept-url pattern="/basiclogout.do*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+ 		
+		<intercept-url pattern="/**" access="ROLE_USER" />
+		<http-basic />
+		<logout delete-cookies="JSESSIONID" invalidate-session="true" logout-success-url="/basiclogout.do"/>
+    </http>
+ 	<authentication-manager>
+	   <authentication-provider>
+	   	   <password-encoder hash="md5"></password-encoder>
+	       <user-service>
+		   		<user name="admin" password="e10adc3949ba59abbe56e057f20f883e" authorities="ROLE_USER" />
+	       </user-service>
+	   </authentication-provider>
+	</authentication-manager>
+ 	-->
+</beans:beans>
