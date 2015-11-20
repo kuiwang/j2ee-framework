@@ -19,127 +19,128 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller("helloAction")
 public class HelloAction extends ActionSupport {
 
-    private EmployeeService employeeService;
+  private EmployeeService employeeService;
 
-    @Resource(name = "employeeServiceImplHibernate4")
-    public void setEmployeeService(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+  @Resource(name = "employeeServiceImplHibernate4")
+  public void setEmployeeService(EmployeeService employeeService) {
+    this.employeeService = employeeService;
+  }
+
+  private DepartmentService departmentService;
+
+  @Resource(name = "departmentServiceImplHibernate4")
+  public void setDepartmentService(DepartmentService departmentService) {
+    this.departmentService = departmentService;
+  }
+
+  public String hello() throws Exception {
+
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=utf-8");
+
+    PrintWriter writer = response.getWriter();
+    writer.write("<script type='text/javascript'>alert('Hello,Maven!');</script>");
+    writer.flush();
+    writer.close();
+    return null;
+  }
+
+  public String save() throws Exception {
+
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=utf-8");
+    PrintWriter writer = response.getWriter();
+
+    try {
+
+      Employee employee = new Employee();
+
+      employee.setEmpname("����");
+      employee.setSex("Ů");
+      employee.setLocation("��������");
+
+      Department department = new Department();
+      department.setDeptname("���Բ�");
+
+      employee.setDepartment(department);
+
+      employeeService.add(employee);
+
+      writer.write("<script type='text/javascript'>alert('����ɹ�!');</script>");
+    } catch (Exception e) {
+      writer.write("<script type='text/javascript'>alert('����ʧ��!\t" + e.getMessage()
+          + "');</script>");
     }
 
-    private DepartmentService departmentService;
+    writer.flush();
+    writer.close();
+    return null;
 
-    @Resource(name = "departmentServiceImplHibernate4")
-    public void setDepartmentService(DepartmentService departmentService) {
-        this.departmentService = departmentService;
+  }
+
+  public String delete() throws Exception {
+
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=utf-8");
+    PrintWriter writer = response.getWriter();
+
+    try {
+
+      departmentService.delete(1);
+
+      writer.write("<script type='text/javascript'>alert('ɾ���ɹ�!');</script>");
+    } catch (Exception e) {
+      writer.write("<script type='text/javascript'>alert('ɾ��ʧ��!\t" + e.getMessage()
+          + "');</script>");
     }
 
-    public String hello() throws Exception {
+    writer.flush();
+    writer.close();
+    return null;
 
-        HttpServletResponse response = ServletActionContext.getResponse();
-        response.setContentType("text/html;charset=utf-8");
+  }
 
-        PrintWriter writer = response.getWriter();
-        writer.write("<script type='text/javascript'>alert('Hello,Maven!');</script>");
-        writer.flush();
-        writer.close();
-        return null;
+  public String print() throws Exception {
+
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=utf-8");
+    PrintWriter writer = response.getWriter();
+    writer.write("<a href='http://mvnrepository.com'>http://mvnrepository.com</a>");
+    writer.flush();
+    writer.close();
+    return null;
+
+  }
+
+  public String modify() throws Exception {
+
+    HttpServletResponse response = ServletActionContext.getResponse();
+    response.setContentType("text/html;charset=utf-8");
+    PrintWriter writer = response.getWriter();
+
+    try {
+      List<Employee> list =
+          employeeService
+              .query(" from com.fengjing.framework.hibernate.model.Employee employee where employee.id = 2 ");
+      Employee employee = list.get(0);
+
+      employee.setEmpname("������");
+      employee.setSex("��");
+      employee.setLocation("�й�����");
+
+      employee.getDepartment().setDeptname("����Ժ");
+
+      employeeService.update(employee);
+      writer.write("<script type='text/javascript'>alert('�޸ĳɹ�!');</script>");
+    } catch (Exception e) {
+      writer.write("<script type='text/javascript'>alert('�޸�ʧ��!\t" + e.getMessage()
+          + "');</script>");
     }
 
-    public String save() throws Exception {
+    writer.flush();
+    writer.close();
+    return null;
 
-        HttpServletResponse response = ServletActionContext.getResponse();
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter writer = response.getWriter();
-
-        try {
-
-            Employee employee = new Employee();
-
-            employee.setEmpname("����");
-            employee.setSex("Ů");
-            employee.setLocation("��������");
-
-            Department department = new Department();
-            department.setDeptname("���Բ�");
-
-            employee.setDepartment(department);
-
-            employeeService.add(employee);
-
-            writer.write("<script type='text/javascript'>alert('����ɹ�!');</script>");
-        } catch (Exception e) {
-            writer.write("<script type='text/javascript'>alert('����ʧ��!\t" + e.getMessage()
-                    + "');</script>");
-        }
-
-        writer.flush();
-        writer.close();
-        return null;
-
-    }
-
-    public String delete() throws Exception {
-
-        HttpServletResponse response = ServletActionContext.getResponse();
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter writer = response.getWriter();
-
-        try {
-
-            departmentService.delete(1);
-
-            writer.write("<script type='text/javascript'>alert('ɾ���ɹ�!');</script>");
-        } catch (Exception e) {
-            writer.write("<script type='text/javascript'>alert('ɾ��ʧ��!\t" + e.getMessage()
-                    + "');</script>");
-        }
-
-        writer.flush();
-        writer.close();
-        return null;
-
-    }
-
-    public String print() throws Exception {
-
-        HttpServletResponse response = ServletActionContext.getResponse();
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter writer = response.getWriter();
-        writer.write("<a href='http://mvnrepository.com'>http://mvnrepository.com</a>");
-        writer.flush();
-        writer.close();
-        return null;
-
-    }
-
-    public String modify() throws Exception {
-
-        HttpServletResponse response = ServletActionContext.getResponse();
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter writer = response.getWriter();
-
-        try {
-            List<Employee> list = employeeService
-                    .query(" from com.fengjing.framework.hibernate.model.Employee employee where employee.id = 2 ");
-            Employee employee = list.get(0);
-
-            employee.setEmpname("������");
-            employee.setSex("��");
-            employee.setLocation("�й�����");
-
-            employee.getDepartment().setDeptname("����Ժ");
-
-            employeeService.update(employee);
-            writer.write("<script type='text/javascript'>alert('�޸ĳɹ�!');</script>");
-        } catch (Exception e) {
-            writer.write("<script type='text/javascript'>alert('�޸�ʧ��!\t" + e.getMessage()
-                    + "');</script>");
-        }
-
-        writer.flush();
-        writer.close();
-        return null;
-
-    }
+  }
 
 }

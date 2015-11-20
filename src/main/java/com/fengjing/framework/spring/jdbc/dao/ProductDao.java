@@ -7,6 +7,6 @@ import com.fengjing.framework.spring.jdbc.model.Product;
 
 public interface ProductDao extends IDao<Product> {
 
-	List<Product> getProductListByCategory(String name);
+  List<Product> getProductListByCategory(String name);
 
 }

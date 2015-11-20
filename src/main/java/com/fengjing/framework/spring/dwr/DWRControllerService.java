@@ -11,9 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/direct")
 public class DWRControllerService {
 
-    @RequestMapping("/dwr")
-    public ModelAndView dwr(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
-            throws Exception {
-        return new ModelAndView("dwr");
-    }
+  @RequestMapping("/dwr")
+  public ModelAndView dwr(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
+      throws Exception {
+    return new ModelAndView("dwr");
+  }
 }

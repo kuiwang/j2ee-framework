@@ -11,52 +11,52 @@ import com.fengjing.framework.spring.jdbc.dao.ProductDao;
 import com.fengjing.framework.spring.jdbc.model.Product;
 import com.fengjing.framework.spring.jdbc.service.ProductService;
 
-@Service(value="jdbcProductServiceImpl")
+@Service(value = "jdbcProductServiceImpl")
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
-	@Resource(name="jdbcProductDaoImpl")
-	private ProductDao productDao;
-	
-	@Override
-	@Transactional
-	public Product findById(long id) {
-		return productDao.findById(id);
-	}
+  @Resource(name = "jdbcProductDaoImpl")
+  private ProductDao productDao;
 
-	@Override
-	@Transactional
-	public void modify(Product t) {
-		productDao.modify(t);
-	}
+  @Override
+  @Transactional
+  public Product findById(long id) {
+    return productDao.findById(id);
+  }
 
-	@Override
-	@Transactional
-	public void save(Product t) {
-		productDao.save(t);
-	}
+  @Override
+  @Transactional
+  public void modify(Product t) {
+    productDao.modify(t);
+  }
 
-	@Override
-	@Transactional
-	public void deleteById(long id) {
-		productDao.deleteById(id);
-	}
+  @Override
+  @Transactional
+  public void save(Product t) {
+    productDao.save(t);
+  }
 
-	@Override
-	@Transactional
-	public void delete(Product t) {
-		productDao.delete(t);
-	}
+  @Override
+  @Transactional
+  public void deleteById(long id) {
+    productDao.deleteById(id);
+  }
 
-	@Override
-	@Transactional
-	public List<Product> listAll() {
-		return productDao.listAll();
-	}
+  @Override
+  @Transactional
+  public void delete(Product t) {
+    productDao.delete(t);
+  }
 
-	@Override
-	public List<Product> getProductListByCategory(String name) {
-		return productDao.getProductListByCategory(name);
-	}
+  @Override
+  @Transactional
+  public List<Product> listAll() {
+    return productDao.listAll();
+  }
+
+  @Override
+  public List<Product> getProductListByCategory(String name) {
+    return productDao.getProductListByCategory(name);
+  }
 
 }

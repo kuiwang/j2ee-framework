@@ -20,92 +20,93 @@ import org.hibernate.validator.constraints.Range;
 @XmlRootElement(name = "contact")
 public class Contact {
 
-    private int id;
+  private int id;
 
-    private String firstname;
+  private String firstname;
 
-    private String lastname;
+  private String lastname;
 
-    private String email;
+  private String email;
 
-    private String telephone;
+  private String telephone;
 
-    private String qq;
+  private String qq;
 
-    private int age;
+  private int age;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
-        return id;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getId() {
+    return id;
+  }
 
-    @XmlElement
-    public void setId(int id) {
-        this.id = id;
-    }
+  @XmlElement
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    @NotEmpty(message = "������Ϊ��!")
-    public String getFirstname() {
-        return firstname;
-    }
+  @NotEmpty(message = "������Ϊ��!")
+  public String getFirstname() {
+    return firstname;
+  }
 
-    @XmlElement
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+  @XmlElement
+  public void setFirstname(String firstname) {
+    this.firstname = firstname;
+  }
 
-    @NotEmpty(message = "�ղ���Ϊ��!")
-    public String getLastname() {
-        return lastname;
-    }
+  @NotEmpty(message = "�ղ���Ϊ��!")
+  public String getLastname() {
+    return lastname;
+  }
 
-    @XmlElement
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+  @XmlElement
+  public void setLastname(String lastname) {
+    this.lastname = lastname;
+  }
 
-    @Email(message = "���ǺϷ��ĵ����ʼ�!")
-    @NotEmpty(message = "�����ʼ�����Ϊ��!")
-    public String getEmail() {
-        return email;
-    }
+  @Email(message = "���ǺϷ��ĵ����ʼ�!")
+  @NotEmpty(message = "�����ʼ�����Ϊ��!")
+  public String getEmail() {
+    return email;
+  }
 
-    @XmlElement
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  @XmlElement
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    @NotEmpty(message = "�绰���벻��Ϊ��!")
-    @Pattern(regexp = "((\\d{3,4})|\\d{3,4}-)?\\d{7,8}", message = "�绰����ֻ��Ϊ����,�Ҳ��ܳ���11λ!(010-8805784)")
-    public String getTelephone() {
-        return telephone;
-    }
+  @NotEmpty(message = "�绰���벻��Ϊ��!")
+  @Pattern(regexp = "((\\d{3,4})|\\d{3,4}-)?\\d{7,8}",
+      message = "�绰����ֻ��Ϊ����,�Ҳ��ܳ���11λ!(010-8805784)")
+  public String getTelephone() {
+    return telephone;
+  }
 
-    @XmlElement
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
+  @XmlElement
+  public void setTelephone(String telephone) {
+    this.telephone = telephone;
+  }
 
-    @Range(min = 1, max = 150, message = "����ֻ����1��150֮��")
-    public int getAge() {
-        return age;
-    }
+  @Range(min = 1, max = 150, message = "����ֻ����1��150֮��")
+  public int getAge() {
+    return age;
+  }
 
-    @XmlElement
-    public void setAge(int age) {
-        this.age = age;
-    }
+  @XmlElement
+  public void setAge(int age) {
+    this.age = age;
+  }
 
-    @NotEmpty(message = "QQ�Ų�����Ϊ��!")
-    @Pattern(regexp = "^[1-9]*[1-9][0-9]*$", message = "QQ��ֻ��Ϊ����")
-    public String getQq() {
-        return qq;
-    }
+  @NotEmpty(message = "QQ�Ų�����Ϊ��!")
+  @Pattern(regexp = "^[1-9]*[1-9][0-9]*$", message = "QQ��ֻ��Ϊ����")
+  public String getQq() {
+    return qq;
+  }
 
-    @XmlElement
-    public void setQq(String qq) {
-        this.qq = qq;
-    }
+  @XmlElement
+  public void setQq(String qq) {
+    this.qq = qq;
+  }
 
 }

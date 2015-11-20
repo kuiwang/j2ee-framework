@@ -13,36 +13,36 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 /**
- * ·µ»ØExcel
- * @author scott
- * ÇëÇóµØÖ·Îªhttp://localhost:8080/maven-framework/poi.do?output=excel
+ * ï¿½ï¿½ï¿½ï¿½Excel
+ * 
+ * @author scott ï¿½ï¿½ï¿½ï¿½ï¿½Ö·Îªhttp://localhost:8080/maven-framework/poi.do?output=excel
  */
 @Controller
-public class PoiExcelReportController extends AbstractController{
+public class PoiExcelReportController extends AbstractController {
 
-	@RequestMapping(value="/poi")
-	protected ModelAndView handleRequestInternal(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String output =ServletRequestUtils.getStringParameter(request, "output");
-	 
-			//dummy data
-			Map<String,String> revenueData = new HashMap<String,String>();
-			revenueData.put("Jan-2010", "$100,000,000");
-			revenueData.put("Feb-2010", "$110,000,000");
-			revenueData.put("Mar-2010", "$130,000,000");
-			revenueData.put("Apr-2010", "$140,000,000");
-			revenueData.put("May-2010", "$200,000,000");
-	 
-			if(output ==null || "".equals(output)){
-				//return normal view
-				return new ModelAndView("RevenueSummary","revenueData",revenueData);
-			}else if("EXCEL".equals(output.toUpperCase())){
-				//return excel view
-				return new ModelAndView("PoiExcelRevenueSummary","revenueData",revenueData);
-			}else{
-				//return normal view
-				return new ModelAndView("RevenueSummary","revenueData",revenueData);
-			}
-	}
+  @RequestMapping(value = "/poi")
+  protected ModelAndView handleRequestInternal(HttpServletRequest request,
+      HttpServletResponse response) throws Exception {
+    String output = ServletRequestUtils.getStringParameter(request, "output");
+
+    // dummy data
+    Map<String, String> revenueData = new HashMap<String, String>();
+    revenueData.put("Jan-2010", "$100,000,000");
+    revenueData.put("Feb-2010", "$110,000,000");
+    revenueData.put("Mar-2010", "$130,000,000");
+    revenueData.put("Apr-2010", "$140,000,000");
+    revenueData.put("May-2010", "$200,000,000");
+
+    if (output == null || "".equals(output)) {
+      // return normal view
+      return new ModelAndView("RevenueSummary", "revenueData", revenueData);
+    } else if ("EXCEL".equals(output.toUpperCase())) {
+      // return excel view
+      return new ModelAndView("PoiExcelRevenueSummary", "revenueData", revenueData);
+    } else {
+      // return normal view
+      return new ModelAndView("RevenueSummary", "revenueData", revenueData);
+    }
+  }
 
 }

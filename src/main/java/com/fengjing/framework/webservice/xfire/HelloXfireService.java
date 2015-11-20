@@ -8,7 +8,7 @@ import javax.jws.WebService;
 @WebService
 public interface HelloXfireService {
 
-    @WebMethod(operationName = "sayHello")
-    @WebResult(name = "returnValue")
-    String sayHello(@WebParam(name = "name") String name);
+  @WebMethod(operationName = "sayHello")
+  @WebResult(name = "returnValue")
+  String sayHello(@WebParam(name = "name") String name);
 }

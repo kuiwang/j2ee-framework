@@ -13,37 +13,37 @@ import com.fengjing.framework.hibernate.model.Department;
 @Repository(value = "departmentDaoHibernate4")
 public class DepartmentDao implements IDao<Department> {
 
-    private SessionFactory sessionFactory;
+  private SessionFactory sessionFactory;
 
-    @Resource(name = "hibernate4sessionFactory")
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+  @Resource(name = "hibernate4sessionFactory")
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
 
-    @Override
-    public void add(Object object) {
-        this.sessionFactory.getCurrentSession().save(object);
-    }
+  @Override
+  public void add(Object object) {
+    this.sessionFactory.getCurrentSession().save(object);
+  }
 
-    @Override
-    public void delete(int id) {
-        this.sessionFactory.getCurrentSession().delete(findById(id));
-    }
+  @Override
+  public void delete(int id) {
+    this.sessionFactory.getCurrentSession().delete(findById(id));
+  }
 
-    @Override
-    public void update(Object object) {
-        this.sessionFactory.getCurrentSession().update(object);
-    }
+  @Override
+  public void update(Object object) {
+    this.sessionFactory.getCurrentSession().update(object);
+  }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Department> query(String queryString) {
-        return this.sessionFactory.getCurrentSession().createQuery(queryString).list();
-    }
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Department> query(String queryString) {
+    return this.sessionFactory.getCurrentSession().createQuery(queryString).list();
+  }
 
-    @Override
-    public Department findById(int id) {
-        return (Department) this.sessionFactory.getCurrentSession().get(Department.class, id);
-    }
+  @Override
+  public Department findById(int id) {
+    return (Department) this.sessionFactory.getCurrentSession().get(Department.class, id);
+  }
 
 }

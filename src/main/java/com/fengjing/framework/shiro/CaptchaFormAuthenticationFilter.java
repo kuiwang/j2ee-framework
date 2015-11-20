@@ -9,24 +9,24 @@ import org.apache.shiro.web.util.WebUtils;
 
 public class CaptchaFormAuthenticationFilter extends FormAuthenticationFilter {
 
-    private final static String captchaParam = "captcha_key";
+  private final static String captchaParam = "captcha_key";
 
-    public String getCaptchaParam() {
-        return captchaParam;
-    }
+  public String getCaptchaParam() {
+    return captchaParam;
+  }
 
-    protected String getCaptcha(ServletRequest request) {
-        return WebUtils.getCleanParam(request, getCaptchaParam());
-    }
+  protected String getCaptcha(ServletRequest request) {
+    return WebUtils.getCleanParam(request, getCaptchaParam());
+  }
 
-    @Override
-    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-        String username = getUsername(request);
-        String password = getPassword(request);
-        String captcha = getCaptcha(request);
-        boolean rememberMe = isRememberMe(request);
-        String host = getHost(request);
-        return new CaptchaUsernamePasswordToken(username, password, rememberMe, host, captcha);
-    }
+  @Override
+  protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+    String username = getUsername(request);
+    String password = getPassword(request);
+    String captcha = getCaptcha(request);
+    boolean rememberMe = isRememberMe(request);
+    String host = getHost(request);
+    return new CaptchaUsernamePasswordToken(username, password, rememberMe, host, captcha);
+  }
 
 }

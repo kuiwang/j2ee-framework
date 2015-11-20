@@ -22,105 +22,104 @@ import com.octo.captcha.service.image.ImageCaptchaService;
 
 public class SimpleJdbcRealm extends JdbcRealm {
 
-    private static final Logger log = LoggerFactory.getLogger(SimpleJdbcRealm.class);
+  private static final Logger log = LoggerFactory.getLogger(SimpleJdbcRealm.class);
 
-    protected ImageCaptchaService imageCaptchaService;
+  protected ImageCaptchaService imageCaptchaService;
 
-    public ImageCaptchaService getImageCaptchaService() {
-        return imageCaptchaService;
+  public ImageCaptchaService getImageCaptchaService() {
+    return imageCaptchaService;
+  }
+
+  public void setImageCaptchaService(ImageCaptchaService imageCaptchaService) {
+    this.imageCaptchaService = imageCaptchaService;
+  }
+
+  /**
+   * ��֤�ص�����, ��¼ʱ����.
+   */
+  @Override
+  protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
+      throws AuthenticationException {
+
+    CaptchaUsernamePasswordToken token = (CaptchaUsernamePasswordToken) authcToken;
+    String parm = token.getCaptcha();
+    try {
+      if (!imageCaptchaService.validateResponseForID(SecurityUtils.getSubject().getSession()
+          .getId().toString(), parm)) {
+        throw new IncorrectCaptchaException("��֤�����");
+      }
+    } catch (Exception e) {
+      throw new IncorrectCaptchaException("��֤�����");
     }
 
-    public void setImageCaptchaService(ImageCaptchaService imageCaptchaService) {
-        this.imageCaptchaService = imageCaptchaService;
+    String username = token.getUsername();
+
+    if (username == null) {
+      throw new AccountException("Null usernames are not allowed by this realm.");
     }
 
-    /**
-     * ��֤�ص�����, ��¼ʱ����.
-     */
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
-            throws AuthenticationException {
+    Connection conn = null;
+    AuthenticationInfo info = null;
+    try {
+      conn = dataSource.getConnection();
 
-        CaptchaUsernamePasswordToken token = (CaptchaUsernamePasswordToken) authcToken;
-        String parm = token.getCaptcha();
-        try {
-            if (!imageCaptchaService.validateResponseForID(SecurityUtils.getSubject().getSession()
-                    .getId().toString(), parm)) {
-                throw new IncorrectCaptchaException("��֤�����");
-            }
-        } catch (Exception e) {
-            throw new IncorrectCaptchaException("��֤�����");
-        }
+      String password = getPasswordForUser(conn, username);
 
-        String username = token.getUsername();
+      if (password == null) {
+        throw new UnknownAccountException("No account found for user [" + username + "]");
+      }
 
-        if (username == null) {
-            throw new AccountException("Null usernames are not allowed by this realm.");
-        }
+      SimpleAuthenticationInfo simpleAuthenticationInfo =
+          new SimpleAuthenticationInfo(username, password, getName());
 
-        Connection conn = null;
-        AuthenticationInfo info = null;
-        try {
-            conn = dataSource.getConnection();
+      simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(username));
 
-            String password = getPasswordForUser(conn, username);
+      info = simpleAuthenticationInfo;
 
-            if (password == null) {
-                throw new UnknownAccountException("No account found for user [" + username + "]");
-            }
+    } catch (SQLException e) {
+      final String message = "There was a SQL error while authenticating user [" + username + "]";
+      if (log.isErrorEnabled()) {
+        log.error(message, e);
+      }
 
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
-                    username, password, getName());
-
-            simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(username));
-
-            info = simpleAuthenticationInfo;
-
-        } catch (SQLException e) {
-            final String message = "There was a SQL error while authenticating user [" + username
-                    + "]";
-            if (log.isErrorEnabled()) {
-                log.error(message, e);
-            }
-
-            throw new AuthenticationException(message, e);
-        } finally {
-            JdbcUtils.closeConnection(conn);
-        }
-
-        return info;
-
+      throw new AuthenticationException(message, e);
+    } finally {
+      JdbcUtils.closeConnection(conn);
     }
 
-    private String getPasswordForUser(Connection conn, String username) throws SQLException {
+    return info;
 
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        String password = null;
-        try {
-            ps = conn.prepareStatement(authenticationQuery);
-            ps.setString(1, username);
+  }
 
-            rs = ps.executeQuery();
+  private String getPasswordForUser(Connection conn, String username) throws SQLException {
 
-            boolean foundResult = false;
-            while (rs.next()) {
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    String password = null;
+    try {
+      ps = conn.prepareStatement(authenticationQuery);
+      ps.setString(1, username);
 
-                if (foundResult) {
-                    throw new AuthenticationException("More than one user row found for user ["
-                            + username + "]. Usernames must be unique.");
-                }
+      rs = ps.executeQuery();
 
-                password = rs.getString(1);
+      boolean foundResult = false;
+      while (rs.next()) {
 
-                foundResult = true;
-            }
-        } finally {
-            JdbcUtils.closeResultSet(rs);
-            JdbcUtils.closeStatement(ps);
+        if (foundResult) {
+          throw new AuthenticationException("More than one user row found for user [" + username
+              + "]. Usernames must be unique.");
         }
 
-        return password;
+        password = rs.getString(1);
+
+        foundResult = true;
+      }
+    } finally {
+      JdbcUtils.closeResultSet(rs);
+      JdbcUtils.closeStatement(ps);
     }
+
+    return password;
+  }
 
 }

@@ -17,26 +17,26 @@ import org.springframework.xml.transform.StringResult;
  */
 public class EchoClient extends WebServiceGatewaySupport {
 
-    private Resource request;
+  private Resource request;
 
-    public void setRequest(Resource request) {
-        this.request = request;
-    }
+  public void setRequest(Resource request) {
+    this.request = request;
+  }
 
-    public void echo() throws IOException {
-        Source requestSource = new ResourceSource(request);
-        StringResult result = new StringResult();
-        getWebServiceTemplate().sendSourceAndReceiveToResult(requestSource, result);
-        System.out.println();
-        System.out.println(result);
-        System.out.println();
-    }
+  public void echo() throws IOException {
+    Source requestSource = new ResourceSource(request);
+    StringResult result = new StringResult();
+    getWebServiceTemplate().sendSourceAndReceiveToResult(requestSource, result);
+    System.out.println();
+    System.out.println(result);
+    System.out.println();
+  }
 
-    public static void main(String[] args) throws IOException {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-                "applicationContext.xml", EchoClient.class);
-        EchoClient echoClient = (EchoClient) applicationContext.getBean("echoClient");
-        echoClient.echo();
-    }
+  public static void main(String[] args) throws IOException {
+    ApplicationContext applicationContext =
+        new ClassPathXmlApplicationContext("applicationContext.xml", EchoClient.class);
+    EchoClient echoClient = (EchoClient) applicationContext.getBean("echoClient");
+    echoClient.echo();
+  }
 
 }

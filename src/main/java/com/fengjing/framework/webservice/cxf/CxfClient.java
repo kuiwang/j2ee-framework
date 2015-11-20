@@ -11,11 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CxfClient {
 
-    @Resource(name = "helloClient")
-    HelloWorld helloWorld;
+  @Resource(name = "helloClient")
+  HelloWorld helloWorld;
 
-    @Test
-    public void test() {
-        System.out.println(helloWorld.sayHi("Spring"));
-    }
+  @Test
+  public void test() {
+    System.out.println(helloWorld.sayHi("Spring"));
+  }
 }

@@ -12,22 +12,22 @@ import org.springframework.web.servlet.mvc.AbstractController;
 @Controller
 public class Log4jController extends AbstractController {
 
-	private static final Logger logger = Logger.getLogger(Log4jController.class);
-	 
-	@Override
-	@RequestMapping("log4j")
-	protected ModelAndView handleRequestInternal(HttpServletRequest request,
-		HttpServletResponse response) throws Exception {
- 
-		ModelAndView model = new ModelAndView("welcome");
-		model.addObject("message", "Hello ~ Log4j");
- 
-		//log it via log4j
-		if(logger.isDebugEnabled()){
-			logger.debug(model);
-		}
- 
-		return model;
-	}
+  private static final Logger logger = Logger.getLogger(Log4jController.class);
+
+  @Override
+  @RequestMapping("log4j")
+  protected ModelAndView handleRequestInternal(HttpServletRequest request,
+      HttpServletResponse response) throws Exception {
+
+    ModelAndView model = new ModelAndView("welcome");
+    model.addObject("message", "Hello ~ Log4j");
+
+    // log it via log4j
+    if (logger.isDebugEnabled()) {
+      logger.debug(model);
+    }
+
+    return model;
+  }
 
 }

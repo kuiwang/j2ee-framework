@@ -15,32 +15,32 @@ import com.fengjing.framework.ibatis.service.ProductService;
 @Service(value = "productServiceImpl")
 public class ProductServiceImpl implements ProductService {
 
-    @Resource(name = "productDaoImpl")
-    private ProductDao productDao;
+  @Resource(name = "productDaoImpl")
+  private ProductDao productDao;
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public List<Product> listAll() {
-        return productDao.listAll();
-    }
+  @Transactional(propagation = Propagation.REQUIRED)
+  public List<Product> listAll() {
+    return productDao.listAll();
+  }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public boolean save(Product product) {
-        return productDao.save(product);
-    }
+  @Transactional(propagation = Propagation.REQUIRED)
+  public boolean save(Product product) {
+    return productDao.save(product);
+  }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public boolean update(Product product) {
-        return productDao.update(product);
-    }
+  @Transactional(propagation = Propagation.REQUIRED)
+  public boolean update(Product product) {
+    return productDao.update(product);
+  }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public Product getModel(int id) {
-        return productDao.getModel(id);
-    }
+  @Transactional(propagation = Propagation.REQUIRED)
+  public Product getModel(int id) {
+    return productDao.getModel(id);
+  }
 
-    @Override
-    public List<Product> selectLikeName(String name) {
-        return productDao.selectLikeName(name);
-    }
+  @Override
+  public List<Product> selectLikeName(String name) {
+    return productDao.selectLikeName(name);
+  }
 
 }

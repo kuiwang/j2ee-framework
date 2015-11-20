@@ -8,51 +8,51 @@ import org.springframework.stereotype.Repository;
 import com.fengjing.framework.struts2.dao.DepartmentDao;
 import com.fengjing.framework.struts2.model.Department;
 
-@Repository(value="departmentDaoImpl")
+@Repository(value = "departmentDaoImpl")
 public class DepartmentDaoImpl implements DepartmentDao {
 
-	@Override
-	public Department findById(long id) {
-		Department department=new Department();
-		department.setDeptid(id);
-		department.setDeptname("ÑÐ·¢²¿");
-		return department;
-	}
+  @Override
+  public Department findById(long id) {
+    Department department = new Department();
+    department.setDeptid(id);
+    department.setDeptname("ï¿½Ð·ï¿½ï¿½ï¿½");
+    return department;
+  }
 
-	@Override
-	public void modify(Department t) {
-		Department department=new Department();
-		department.setDeptid(t.getDeptid());
-		department.setDeptname("ÑÐ·¢²¿");
-		System.out.println(t.getDeptid()+","+t.getDeptname());
-	}
+  @Override
+  public void modify(Department t) {
+    Department department = new Department();
+    department.setDeptid(t.getDeptid());
+    department.setDeptname("ï¿½Ð·ï¿½ï¿½ï¿½");
+    System.out.println(t.getDeptid() + "," + t.getDeptname());
+  }
 
-	@Override
-	public void save(Department t) {
-		System.out.println(t.getDeptid()+","+t.getDeptname());
-	}
+  @Override
+  public void save(Department t) {
+    System.out.println(t.getDeptid() + "," + t.getDeptname());
+  }
 
-	@Override
-	public void deleteById(long id) {
-		System.out.println(id);
-	}
+  @Override
+  public void deleteById(long id) {
+    System.out.println(id);
+  }
 
-	@Override
-	public void delete(Department t) {
-		System.out.println(t.getDeptid());
-	}
+  @Override
+  public void delete(Department t) {
+    System.out.println(t.getDeptid());
+  }
 
-	@Override
-	public List<Department> listAll() {
-		List<Department> lists=new ArrayList<Department>();
-		Department department;
-		for (int i = 1; i <= 50; i++) {
-			department=new Department();
-			department.setDeptid(i);
-			department.setDeptname("ÑÐ·¢²¿");
-			lists.add(department);
-		}
-		return lists;
-	}
+  @Override
+  public List<Department> listAll() {
+    List<Department> lists = new ArrayList<Department>();
+    Department department;
+    for (int i = 1; i <= 50; i++) {
+      department = new Department();
+      department.setDeptid(i);
+      department.setDeptname("ï¿½Ð·ï¿½ï¿½ï¿½");
+      lists.add(department);
+    }
+    return lists;
+  }
 
 }

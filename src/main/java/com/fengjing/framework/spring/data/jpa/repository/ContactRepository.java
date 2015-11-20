@@ -8,25 +8,30 @@ import com.fengjing.framework.springmvc.model.Contact;
 
 /**
  * Spring Data Jpa Repository
+ * 
  * @author fengjing
  *
  */
-public interface ContactRepository extends PagingAndSortingRepository<Contact, Integer>{
-	
-	/**
-	 * ¸Ã·½·¨Êµ¼ÊÉÏÊÇ²éÑ¯com.fengjing.framework.model.Contact ÖÐµÄ@NamedQuery(name="findById",query="select a from Contact a where a.id= ?1")
-	 * @see com.fengjing.framework.model.Contact<br/>@NamedQuery(name="Contact.findById",query="select a from Contact a where a.id= ?1")
-	 * @param id
-	 * @return
-	 */
-	Contact findById(int id);
-	
-	/**
-	 * ²éÑ¯ÄêÁäÐ¡ÓÚ150Ëê ÇÒ°´Id½µÐòÅÅÁÐ
-	 * @param age
-	 * @param pageable
-	 * @return
-	 */
-	Page<Contact> findByAgeLessThanEqualOrderByIdDesc(int age,Pageable pageable);
-	
+public interface ContactRepository extends PagingAndSortingRepository<Contact, Integer> {
+
+  /**
+   * ï¿½Ã·ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½Ñ¯com.fengjing.framework.model.Contact
+   * ï¿½Ðµï¿½@NamedQuery(name="findById",query="select a from Contact a where a.id= ?1")
+   * 
+   * @see com.fengjing.framework.model.Contact<br/>
+   *      @NamedQuery(name="Contact.findById",query="select a from Contact a where a.id= ?1")
+   * @param id
+   * @return
+   */
+  Contact findById(int id);
+
+  /**
+   * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½150ï¿½ï¿½ ï¿½Ò°ï¿½Idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   * 
+   * @param age
+   * @param pageable
+   * @return
+   */
+  Page<Contact> findByAgeLessThanEqualOrderByIdDesc(int age, Pageable pageable);
+
 }

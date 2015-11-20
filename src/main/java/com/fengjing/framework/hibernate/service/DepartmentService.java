@@ -6,11 +6,11 @@ import com.fengjing.framework.hibernate.model.Department;
 
 public interface DepartmentService {
 
-    public void add(Object object);
+  public void add(Object object);
 
-    public void delete(int id);
+  public void delete(int id);
 
-    public void update(Object object);
+  public void update(Object object);
 
-    public List<Department> query(String queryString);
+  public List<Department> query(String queryString);
 }

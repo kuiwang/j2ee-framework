@@ -12,12 +12,12 @@ import com.fengjing.framework.struts.form.HelloWorldForm;
 
 public class HelloWorldAction extends MappingDispatchAction {
 
-    public ActionForward execute(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+      HttpServletResponse response) throws Exception {
 
-        HelloWorldForm helloWorldForm = (HelloWorldForm) form;
-        helloWorldForm.setMessage("Hello World! Struts");
+    HelloWorldForm helloWorldForm = (HelloWorldForm) form;
+    helloWorldForm.setMessage("Hello World! Struts");
 
-        return mapping.findForward("success");
-    }
+    return mapping.findForward("success");
+  }
 }

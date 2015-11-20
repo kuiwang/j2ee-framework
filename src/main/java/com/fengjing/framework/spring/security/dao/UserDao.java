@@ -4,14 +4,16 @@ import java.util.List;
 
 import com.fengjing.framework.spring.security.model.User;
 
-public interface UserDao{
-	
-	User findUserByUsername(String username);
-	/**
-	 * ¸ù¾Ýuserid²éÑ¯½ÇÉ«
-	 * @param userid
-	 * @return
-	 */
-	List<String> findAuthority(String userid);
-	
+public interface UserDao {
+
+  User findUserByUsername(String username);
+
+  /**
+   * ï¿½ï¿½ï¿½ï¿½useridï¿½ï¿½Ñ¯ï¿½ï¿½É«
+   * 
+   * @param userid
+   * @return
+   */
+  List<String> findAuthority(String userid);
+
 }

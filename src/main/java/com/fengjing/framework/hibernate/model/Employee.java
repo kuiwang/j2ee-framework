@@ -21,74 +21,74 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "t_employee", catalog = "hibernate4")
 public class Employee {
 
-    /**
-     * ��Ա���
-     */
-    private int id;
+  /**
+   * ��Ա���
+   */
+  private int id;
 
-    /**
-     * ��Ա����
-     */
-    private String empname;
+  /**
+   * ��Ա����
+   */
+  private String empname;
 
-    /**
-     * ��Ա�Ա�
-     */
-    private String sex;
+  /**
+   * ��Ա�Ա�
+   */
+  private String sex;
 
-    /**
-     * ��Աסַ
-     */
-    private String location;
+  /**
+   * ��Աסַ
+   */
+  private String location;
 
-    /**
-     * �ù�Ա���ڲ���
-     */
-    private Department department;
+  /**
+   * �ù�Ա���ڲ���
+   */
+  private Department department;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
-        return id;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getEmpname() {
-        return empname;
-    }
+  public String getEmpname() {
+    return empname;
+  }
 
-    public void setEmpname(String empname) {
-        this.empname = empname;
-    }
+  public void setEmpname(String empname) {
+    this.empname = empname;
+  }
 
-    public String getSex() {
-        return sex;
-    }
+  public String getSex() {
+    return sex;
+  }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
 
-    public String getLocation() {
-        return location;
-    }
+  public String getLocation() {
+    return location;
+  }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+  public void setLocation(String location) {
+    this.location = location;
+  }
 
-    @ManyToOne()
-    @Cascade(value = { CascadeType.ALL })
-    @JoinColumn(name = "deptid")
-    public Department getDepartment() {
-        return department;
-    }
+  @ManyToOne()
+  @Cascade(value = {CascadeType.ALL})
+  @JoinColumn(name = "deptid")
+  public Department getDepartment() {
+    return department;
+  }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
+  public void setDepartment(Department department) {
+    this.department = department;
+  }
 
 }

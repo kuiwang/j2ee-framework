@@ -15,31 +15,32 @@ import com.fengjing.framework.springmvc.model.Contact;
 import com.fengjing.framework.springmvc.model.Contacts;
 
 /**
- * ·µ»Øjson¸ñÊ½µÄÊý¾Ý
+ * ï¿½ï¿½ï¿½ï¿½jsonï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * 
  * @author fengjing
  *
  */
 @Controller
 public class ResponseJsonController {
-	
-	@Resource
-	ContactService contactService;
-	
-	@RequestMapping(value="/json/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Contact getContactInJson(@PathVariable(value="id")int id){
-		Contact contact = contactService.findById(id);
-		return contact;
-	}
-	
-	
-	
-	@RequestMapping(value="/json",produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Contacts getContactsInJson(){
-		List<Contact> contact = contactService.listAll();
-		Contacts contacts=new Contacts();
-		contacts.setContacts(contact);
-		return contacts;
-	}
-	
-	
+
+  @Resource
+  ContactService contactService;
+
+  @RequestMapping(value = "/json/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public @ResponseBody Contact getContactInJson(@PathVariable(value = "id") int id) {
+    Contact contact = contactService.findById(id);
+    return contact;
+  }
+
+
+
+  @RequestMapping(value = "/json", produces = MediaType.APPLICATION_JSON_VALUE)
+  public @ResponseBody Contacts getContactsInJson() {
+    List<Contact> contact = contactService.listAll();
+    Contacts contacts = new Contacts();
+    contacts.setContacts(contact);
+    return contacts;
+  }
+
+
 }

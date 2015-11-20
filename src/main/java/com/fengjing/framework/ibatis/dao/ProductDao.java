@@ -6,13 +6,13 @@ import com.fengjing.framework.ibatis.model.Product;
 
 public interface ProductDao {
 
-    List<Product> listAll();
+  List<Product> listAll();
 
-    List<Product> selectLikeName(String name);
+  List<Product> selectLikeName(String name);
 
-    boolean save(Product product);
+  boolean save(Product product);
 
-    boolean update(Product product);
+  boolean update(Product product);
 
-    Product getModel(int id);
+  Product getModel(int id);
 }

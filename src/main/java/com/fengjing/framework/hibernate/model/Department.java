@@ -22,47 +22,47 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "t_department", catalog = "hibernate4")
 public class Department {
 
-    /**
-     * ���ű��
-     */
-    private int id;
+  /**
+   * ���ű��
+   */
+  private int id;
 
-    /**
-     * ��������
-     */
-    private String deptname;
+  /**
+   * ��������
+   */
+  private String deptname;
 
-    /**
-     * �ò������еĹ�Ա
-     */
-    private Set<Employee> sets;
+  /**
+   * �ò������еĹ�Ա
+   */
+  private Set<Employee> sets;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
-        return id;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getDeptname() {
-        return deptname;
-    }
+  public String getDeptname() {
+    return deptname;
+  }
 
-    public void setDeptname(String deptname) {
-        this.deptname = deptname;
-    }
+  public void setDeptname(String deptname) {
+    this.deptname = deptname;
+  }
 
-    @OneToMany(mappedBy = "department")
-    @Cascade(value = { CascadeType.ALL })
-    public Set<Employee> getSets() {
-        return sets;
-    }
+  @OneToMany(mappedBy = "department")
+  @Cascade(value = {CascadeType.ALL})
+  public Set<Employee> getSets() {
+    return sets;
+  }
 
-    public void setSets(Set<Employee> sets) {
-        this.sets = sets;
-    }
+  public void setSets(Set<Employee> sets) {
+    this.sets = sets;
+  }
 
 }

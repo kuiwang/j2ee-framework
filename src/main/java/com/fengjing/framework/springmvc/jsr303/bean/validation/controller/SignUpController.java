@@ -14,23 +14,23 @@ import com.fengjing.framework.springmvc.jsr303.bean.validation.model.Customer;
 @RequestMapping("/customer")
 public class SignUpController {
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String addCustomer(@Valid Customer customer, BindingResult result) {
+  @RequestMapping(value = "/signup", method = RequestMethod.POST)
+  public String addCustomer(@Valid Customer customer, BindingResult result) {
 
-        if (result.hasErrors()) {
-            return "SignUpForm";
-        } else {
-            return "Done";
-        }
-
+    if (result.hasErrors()) {
+      return "SignUpForm";
+    } else {
+      return "Done";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String displayCustomerForm(ModelMap model) {
+  }
 
-        model.addAttribute("customer", new Customer());
-        return "SignUpForm";
+  @RequestMapping(method = RequestMethod.GET)
+  public String displayCustomerForm(ModelMap model) {
 
-    }
+    model.addAttribute("customer", new Customer());
+    return "SignUpForm";
+
+  }
 
 }

@@ -1,4 +1,3 @@
-
 package com.fengjing.framework.webservice.jaxws.client;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,9 +6,11 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for user complex type.
+ * <p>
+ * Java class for user complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="user">
@@ -29,105 +30,88 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "user", propOrder = {
-    "address",
-    "age",
-    "dept",
-    "name"
-})
+@XmlType(name = "user", propOrder = {"address", "age", "dept", "name"})
 public class User {
 
-    protected String address;
-    protected int age;
-    protected Dept dept;
-    protected String name;
+  protected String address;
+  protected int age;
+  protected Dept dept;
+  protected String name;
 
-    /**
-     * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAddress() {
-        return address;
-    }
+  /**
+   * Gets the value of the address property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getAddress() {
+    return address;
+  }
 
-    /**
-     * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAddress(String value) {
-        this.address = value;
-    }
+  /**
+   * Sets the value of the address property.
+   * 
+   * @param value allowed object is {@link String }
+   * 
+   */
+  public void setAddress(String value) {
+    this.address = value;
+  }
 
-    /**
-     * Gets the value of the age property.
-     * 
-     */
-    public int getAge() {
-        return age;
-    }
+  /**
+   * Gets the value of the age property.
+   * 
+   */
+  public int getAge() {
+    return age;
+  }
 
-    /**
-     * Sets the value of the age property.
-     * 
-     */
-    public void setAge(int value) {
-        this.age = value;
-    }
+  /**
+   * Sets the value of the age property.
+   * 
+   */
+  public void setAge(int value) {
+    this.age = value;
+  }
 
-    /**
-     * Gets the value of the dept property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Dept }
-     *     
-     */
-    public Dept getDept() {
-        return dept;
-    }
+  /**
+   * Gets the value of the dept property.
+   * 
+   * @return possible object is {@link Dept }
+   * 
+   */
+  public Dept getDept() {
+    return dept;
+  }
 
-    /**
-     * Sets the value of the dept property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Dept }
-     *     
-     */
-    public void setDept(Dept value) {
-        this.dept = value;
-    }
+  /**
+   * Sets the value of the dept property.
+   * 
+   * @param value allowed object is {@link Dept }
+   * 
+   */
+  public void setDept(Dept value) {
+    this.dept = value;
+  }
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * Gets the value of the name property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
+  /**
+   * Sets the value of the name property.
+   * 
+   * @param value allowed object is {@link String }
+   * 
+   */
+  public void setName(String value) {
+    this.name = value;
+  }
 
 }

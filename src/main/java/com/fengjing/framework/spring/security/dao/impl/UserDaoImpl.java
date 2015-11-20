@@ -15,35 +15,37 @@ import com.fengjing.framework.spring.security.model.User;
 
 @Repository("securityUserDaoImpl")
 public class UserDaoImpl implements UserDao {
-	
-	private JdbcTemplate jdbcTemplate;
-	
-	@Resource(name="securityjdbcTemplate")
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
 
-	@Override
-	public User findUserByUsername(String username) {
-		return jdbcTemplate.queryForObject("SELECT * FROM users WHERE username = ? ", new ParameterizedSingleColumnRowMapper<User>(){
-			@Override
-			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-				User user=new User();
-				user.setUserid(rs.getString(1));
-				user.setUsername(rs.getString(2));
-				user.setPassword(rs.getString(3));
-				user.setEnabled(rs.getInt(4));
-				
-				user.setAuthority(findAuthority(user.getUserid()));
-				
-				return user;
-			}
-		},username);
-	}
+  private JdbcTemplate jdbcTemplate;
 
-	@Override
-	public List<String> findAuthority(String userid) {
-		return jdbcTemplate.queryForList("SELECT authority from user_roles where USER_ID = ? ", new Object[]{userid},String.class );
-	}
-	
+  @Resource(name = "securityjdbcTemplate")
+  public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
+  }
+
+  @Override
+  public User findUserByUsername(String username) {
+    return jdbcTemplate.queryForObject("SELECT * FROM users WHERE username = ? ",
+        new ParameterizedSingleColumnRowMapper<User>() {
+          @Override
+          public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+            User user = new User();
+            user.setUserid(rs.getString(1));
+            user.setUsername(rs.getString(2));
+            user.setPassword(rs.getString(3));
+            user.setEnabled(rs.getInt(4));
+
+            user.setAuthority(findAuthority(user.getUserid()));
+
+            return user;
+          }
+        }, username);
+  }
+
+  @Override
+  public List<String> findAuthority(String userid) {
+    return jdbcTemplate.queryForList("SELECT authority from user_roles where USER_ID = ? ",
+        new Object[] {userid}, String.class);
+  }
+
 }

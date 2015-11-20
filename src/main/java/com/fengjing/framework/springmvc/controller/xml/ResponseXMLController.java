@@ -15,39 +15,42 @@ import com.fengjing.framework.springmvc.model.Contact;
 import com.fengjing.framework.springmvc.model.Contacts;
 
 /**
- * ·µ»Øxml¸ñÊ½µÄÊý¾Ý
+ * ï¿½ï¿½ï¿½ï¿½xmlï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * 
  * @author fengjing
  *
  */
 @Controller
 public class ResponseXMLController {
-	
-	@Resource
-	ContactService contactService;
-	
-	/**
-	 * ¸ù¾Ýid²éÑ¯Ò»ÌõxmlÊý¾Ý
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping(value="/xml/{id}",produces=MediaType.APPLICATION_XML_VALUE)
-	public @ResponseBody Contact getContactInXML(@PathVariable(value="id")int id){
-		Contact contact = contactService.findById(id);
-		return contact;
-	}
-	
-	
-	/**
-	 * ²éÑ¯¶à¸öxmlÊý¾Ý
-	 * @return
-	 */
-	@RequestMapping(value="/xml",produces=MediaType.APPLICATION_XML_VALUE)
-	public @ResponseBody Contacts getContactsInXML(){
-		List<Contact> contact = contactService.listAll();
-		Contacts contacts=new Contacts();
-		contacts.setContacts(contact);
-		return contacts;
-	}
-	
-	
+
+  @Resource
+  ContactService contactService;
+
+  /**
+   * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½Ñ¯Ò»ï¿½ï¿½xmlï¿½ï¿½ï¿½ï¿½
+   * 
+   * @param id
+   * @return
+   */
+  @RequestMapping(value = "/xml/{id}", produces = MediaType.APPLICATION_XML_VALUE)
+  public @ResponseBody Contact getContactInXML(@PathVariable(value = "id") int id) {
+    Contact contact = contactService.findById(id);
+    return contact;
+  }
+
+
+  /**
+   * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½xmlï¿½ï¿½ï¿½ï¿½
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
+  public @ResponseBody Contacts getContactsInXML() {
+    List<Contact> contact = contactService.listAll();
+    Contacts contacts = new Contacts();
+    contacts.setContacts(contact);
+    return contacts;
+  }
+
+
 }

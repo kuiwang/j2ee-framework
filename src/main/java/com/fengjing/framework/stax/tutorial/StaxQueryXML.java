@@ -15,57 +15,59 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 /**
- * @see	http://www.vogella.com/articles/JavaXML/article.html
- * stax XPath query
+ * @see http://www.vogella.com/articles/JavaXML/article.html stax XPath query
  * @author scott
  *
  */
 public class StaxQueryXML {
-	
-	public void query() throws ParserConfigurationException, SAXException,IOException, XPathExpressionException {
-		// Standard of reading a XML file
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setNamespaceAware(true);
-		DocumentBuilder builder;
-		Document doc = null;
-		XPathExpression expr = null;
-		builder = factory.newDocumentBuilder();
-		doc = builder.parse(StaxQueryXML.class.getResourceAsStream("person.xml"));
 
-		// Create a XPathFactory
-		XPathFactory xFactory = XPathFactory.newInstance();
+  public void query() throws ParserConfigurationException, SAXException, IOException,
+      XPathExpressionException {
+    // Standard of reading a XML file
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    factory.setNamespaceAware(true);
+    DocumentBuilder builder;
+    Document doc = null;
+    XPathExpression expr = null;
+    builder = factory.newDocumentBuilder();
+    doc = builder.parse(StaxQueryXML.class.getResourceAsStream("person.xml"));
 
-		// Create a XPath object
-		XPath xpath = xFactory.newXPath();
+    // Create a XPathFactory
+    XPathFactory xFactory = XPathFactory.newInstance();
 
-		// Compile the XPath expression
-		expr = xpath.compile("//person[firstname='Lars']/lastname/text()");
-		// Run the query and get a nodeset
-		Object result = expr.evaluate(doc, XPathConstants.NODESET);
+    // Create a XPath object
+    XPath xpath = xFactory.newXPath();
 
-		// Cast the result to a DOM NodeList
-		NodeList nodes = (NodeList) result;
-		for (int i = 0; i < nodes.getLength(); i++) {
-			System.out.println(nodes.item(i).getNodeValue());
-		}
+    // Compile the XPath expression
+    expr = xpath.compile("//person[firstname='Lars']/lastname/text()");
+    // Run the query and get a nodeset
+    Object result = expr.evaluate(doc, XPathConstants.NODESET);
 
-		// New XPath expression to get the number of people with name lars
-		expr = xpath.compile("count(//person[firstname='Lars'])");
-		// Run the query and get the number of nodes
-		Double number = (Double) expr.evaluate(doc, XPathConstants.NUMBER);
-		System.out.println("Number of objects " + number);
+    // Cast the result to a DOM NodeList
+    NodeList nodes = (NodeList) result;
+    for (int i = 0; i < nodes.getLength(); i++) {
+      System.out.println(nodes.item(i).getNodeValue());
+    }
 
-		// Do we have more then 2 people with name lars?
-		expr = xpath.compile("count(//person[firstname='Lars']) >2");
-		// Run the query and get the number of nodes
-		Boolean check = (Boolean) expr.evaluate(doc, XPathConstants.BOOLEAN);
-		System.out.println(check);
+    // New XPath expression to get the number of people with name lars
+    expr = xpath.compile("count(//person[firstname='Lars'])");
+    // Run the query and get the number of nodes
+    Double number = (Double) expr.evaluate(doc, XPathConstants.NUMBER);
+    System.out.println("Number of objects " + number);
 
-	}
+    // Do we have more then 2 people with name lars?
+    expr = xpath.compile("count(//person[firstname='Lars']) >2");
+    // Run the query and get the number of nodes
+    Boolean check = (Boolean) expr.evaluate(doc, XPathConstants.BOOLEAN);
+    System.out.println(check);
 
-	@Test
-	public void test() throws XPathExpressionException,ParserConfigurationException, SAXException, IOException {
-		query();
-	}
+  }
+
+  @Test
+  public void test() throws XPathExpressionException, ParserConfigurationException, SAXException,
+      IOException {
+    query();
+  }
 }

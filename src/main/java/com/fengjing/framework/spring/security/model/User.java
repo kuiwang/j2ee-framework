@@ -9,88 +9,88 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @SuppressWarnings("serial")
-public class User implements UserDetails{
-	
-	private String userid;
-	private String username;
-	private String password;
-	private int enabled;
-	/**
-	 * ╫ги╚
-	 */
-	private List<String> authority;
+public class User implements UserDetails {
 
-	public String getUserid() {
-		return userid;
-	}
+  private String userid;
+  private String username;
+  private String password;
+  private int enabled;
+  /**
+   * О©╫О©╫и╚
+   */
+  private List<String> authority;
 
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
+  public String getUserid() {
+    return userid;
+  }
 
-	public String getUsername() {
-		return username;
-	}
+  public void setUserid(String userid) {
+    this.userid = userid;
+  }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  public String getUsername() {
+    return username;
+  }
 
-	public String getPassword() {
-		return password;
-	}
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+  public String getPassword() {
+    return password;
+  }
 
-	public int getEnabled() {
-		return enabled;
-	}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	public void setEnabled(int enabled) {
-		this.enabled = enabled;
-	}
-	
-	public List<String> getAuthority() {
-		return authority;
-	}
+  public int getEnabled() {
+    return enabled;
+  }
 
-	public void setAuthority(List<String> authority) {
-		this.authority = authority;
-	}
+  public void setEnabled(int enabled) {
+    this.enabled = enabled;
+  }
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authoritys=new ArrayList<GrantedAuthority>();
-		GrantedAuthority authority;
-		if(this.getAuthority()!=null&&this.getAuthority().size()>0){
-			for (String auth : this.getAuthority()) {
-				authority=new SimpleGrantedAuthority(auth);
-				authoritys.add(authority);
-			}
-		}
-		return authoritys;
-	}
+  public List<String> getAuthority() {
+    return authority;
+  }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
+  public void setAuthority(List<String> authority) {
+    this.authority = authority;
+  }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    List<GrantedAuthority> authoritys = new ArrayList<GrantedAuthority>();
+    GrantedAuthority authority;
+    if (this.getAuthority() != null && this.getAuthority().size() > 0) {
+      for (String auth : this.getAuthority()) {
+        authority = new SimpleGrantedAuthority(auth);
+        authoritys.add(authority);
+      }
+    }
+    return authoritys;
+  }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
 
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 
 }

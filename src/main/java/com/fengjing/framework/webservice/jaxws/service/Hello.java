@@ -12,51 +12,48 @@ import com.fengjing.framework.webservice.jaxws.model.User;
 
 /**
  * @see http://jax-ws-commons.java.net/spring/
- * @see wsdlµØÖ·http://localhost:8080/maven-framework/service/hello?wsdl
+ * @see wsdlï¿½ï¿½Ö·http://localhost:8080/maven-framework/service/hello?wsdl
  * @author scott
  *
  */
 
 @WebService
 public class Hello {
-    
-    private HelloInf hello;
-    
-    /**
-     * Sample web service method to say Hello
-     * @param name
-     * @return 
-     */
-    @WebMethod(operationName="sayHello")
-    public String sayHello(@WebParam(name="name")String name)
-    {
-        return "Hey! "+name.toUpperCase()+ " Welocme to JAX-WS without Spring!";
-    }
-    
-    @WebMethod(operationName="sayHelloUsingSpring")
-    public String sayHelloUsingSpring(@WebParam(name="name")String name)
-    {
-        return hello.sayHello(name);
-    }
-    
-    
-    @WebMethod(operationName="getAllUsers")
-    public List<User> getAllUsers()
-    {
-        return hello.getAllUsers();
-    }
-    
-    @WebMethod(operationName="print")
-    public User print(@WebParam(name="user")User user){
-    	return hello.print(user);
-    }
-    
-    
-    @WebMethod(exclude=true)
-    public void setHello(HelloInf hello)
-    {
-        this.hello = hello;
-    }
-    
-    
+
+  private HelloInf hello;
+
+  /**
+   * Sample web service method to say Hello
+   * 
+   * @param name
+   * @return
+   */
+  @WebMethod(operationName = "sayHello")
+  public String sayHello(@WebParam(name = "name") String name) {
+    return "Hey! " + name.toUpperCase() + " Welocme to JAX-WS without Spring!";
+  }
+
+  @WebMethod(operationName = "sayHelloUsingSpring")
+  public String sayHelloUsingSpring(@WebParam(name = "name") String name) {
+    return hello.sayHello(name);
+  }
+
+
+  @WebMethod(operationName = "getAllUsers")
+  public List<User> getAllUsers() {
+    return hello.getAllUsers();
+  }
+
+  @WebMethod(operationName = "print")
+  public User print(@WebParam(name = "user") User user) {
+    return hello.print(user);
+  }
+
+
+  @WebMethod(exclude = true)
+  public void setHello(HelloInf hello) {
+    this.hello = hello;
+  }
+
+
 }

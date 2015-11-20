@@ -22,39 +22,39 @@ import javax.validation.constraints.NotNull;
 @Table(name = "dept", catalog = "framework")
 public class Dept {
 
-    private int id;
+  private int id;
 
-    private String deptname;
+  private String deptname;
 
-    private Set<User> users;
+  private Set<User> users;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
-        return id;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    @NotNull
-    @Column(unique = true)
-    public String getDeptname() {
-        return deptname;
-    }
+  @NotNull
+  @Column(unique = true)
+  public String getDeptname() {
+    return deptname;
+  }
 
-    public void setDeptname(String deptname) {
-        this.deptname = deptname;
-    }
+  public void setDeptname(String deptname) {
+    this.deptname = deptname;
+  }
 
-    @OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public Set<User> getUsers() {
-        return users;
-    }
+  @OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  public Set<User> getUsers() {
+    return users;
+  }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+  public void setUsers(Set<User> users) {
+    this.users = users;
+  }
 
 }

@@ -8,26 +8,26 @@ import com.fengjing.framework.springmvc.dwr.model.User;
 
 public class UserDaoImpl implements UserDao {
 
-    @Override
-    public boolean checkUsernameIsExists(String username) {
-        return true;
-    }
+  @Override
+  public boolean checkUsernameIsExists(String username) {
+    return true;
+  }
 
-    @Override
-    public String getUsername(long id) {
-        return "dwrservice";
-    }
+  @Override
+  public String getUsername(long id) {
+    return "dwrservice";
+  }
 
-    @Override
-    public User findUserById(long id) {
-        return new User(1, "admin", "1987-02-03", "��������");
-    }
+  @Override
+  public User findUserById(long id) {
+    return new User(1, "admin", "1987-02-03", "��������");
+  }
 
-    public List<User> listAll() {
-        List<User> lists = new ArrayList<User>();
-        for (int i = 1; i <= 100; i++) {
-            lists.add(new User(i, "admin" + i, "1987-02-03", "��������" + i));
-        }
-        return lists;
+  public List<User> listAll() {
+    List<User> lists = new ArrayList<User>();
+    for (int i = 1; i <= 100; i++) {
+      lists.add(new User(i, "admin" + i, "1987-02-03", "��������" + i));
     }
+    return lists;
+  }
 }

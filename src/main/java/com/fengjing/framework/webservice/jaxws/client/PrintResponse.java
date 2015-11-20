@@ -1,4 +1,3 @@
-
 package com.fengjing.framework.webservice.jaxws.client;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,9 +7,11 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for printResponse complex type.
+ * <p>
+ * Java class for printResponse complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="printResponse">
@@ -27,36 +28,30 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "printResponse", propOrder = {
-    "_return"
-})
+@XmlType(name = "printResponse", propOrder = {"_return"})
 public class PrintResponse {
 
-    @XmlElement(name = "return")
-    protected User _return;
+  @XmlElement(name = "return")
+  protected User _return;
 
-    /**
-     * Gets the value of the return property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link User }
-     *     
-     */
-    public User getReturn() {
-        return _return;
-    }
+  /**
+   * Gets the value of the return property.
+   * 
+   * @return possible object is {@link User }
+   * 
+   */
+  public User getReturn() {
+    return _return;
+  }
 
-    /**
-     * Sets the value of the return property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link User }
-     *     
-     */
-    public void setReturn(User value) {
-        this._return = value;
-    }
+  /**
+   * Sets the value of the return property.
+   * 
+   * @param value allowed object is {@link User }
+   * 
+   */
+  public void setReturn(User value) {
+    this._return = value;
+  }
 
 }

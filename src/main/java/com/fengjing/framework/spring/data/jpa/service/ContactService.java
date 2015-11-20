@@ -8,27 +8,28 @@ import org.springframework.data.domain.Pageable;
 import com.fengjing.framework.springmvc.model.Contact;
 
 public interface ContactService {
-	
-	Contact findById(int id);
-	
-	Contact save(Contact contact);
-	
-	Contact modifyContact(Contact contact);
-	
-	void delete(Contact contact);
-	
-	void delete(int id);
-	
-	Page<Contact> findAll(Pageable pageable);
-	
-	List<Contact> listAll();
-	
-	/**
-	 * ²éÑ¯ÄêÁäÐ¡ÓÚ150Ëê ÇÒ°´Id½µÐòÅÅÁÐ
-	 * @param age
-	 * @param pageable
-	 * @return
-	 */
-	Page<Contact> findByAgeLessThanEqualOrderByIdDesc(int age,Pageable pageable);
-	
+
+  Contact findById(int id);
+
+  Contact save(Contact contact);
+
+  Contact modifyContact(Contact contact);
+
+  void delete(Contact contact);
+
+  void delete(int id);
+
+  Page<Contact> findAll(Pageable pageable);
+
+  List<Contact> listAll();
+
+  /**
+   * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½150ï¿½ï¿½ ï¿½Ò°ï¿½Idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   * 
+   * @param age
+   * @param pageable
+   * @return
+   */
+  Page<Contact> findByAgeLessThanEqualOrderByIdDesc(int age, Pageable pageable);
+
 }

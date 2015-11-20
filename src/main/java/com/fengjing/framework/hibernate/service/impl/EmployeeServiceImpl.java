@@ -16,35 +16,35 @@ import com.fengjing.framework.hibernate.service.EmployeeService;
 @Transactional()
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private IDao<Employee> dao;
+  private IDao<Employee> dao;
 
-    @Resource(name = "employeeDaoHibernate4")
-    public void setDao(IDao<Employee> dao) {
-        this.dao = dao;
-    }
+  @Resource(name = "employeeDaoHibernate4")
+  public void setDao(IDao<Employee> dao) {
+    this.dao = dao;
+  }
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void add(Object object) {
-        dao.add(object);
-    }
+  @Override
+  @Transactional(propagation = Propagation.REQUIRED)
+  public void add(Object object) {
+    dao.add(object);
+  }
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void delete(int id) {
-        dao.delete(id);
-    }
+  @Override
+  @Transactional(propagation = Propagation.REQUIRED)
+  public void delete(int id) {
+    dao.delete(id);
+  }
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void update(Object object) {
-        dao.update(object);
-    }
+  @Override
+  @Transactional(propagation = Propagation.REQUIRED)
+  public void update(Object object) {
+    dao.update(object);
+  }
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public List<Employee> query(String queryString) {
-        return dao.query(queryString);
-    }
+  @Override
+  @Transactional(propagation = Propagation.REQUIRED)
+  public List<Employee> query(String queryString) {
+    return dao.query(queryString);
+  }
 
 }

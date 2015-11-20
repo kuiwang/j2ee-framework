@@ -7,7 +7,7 @@ import com.fengjing.framework.webservice.springws.service.EchoService;
 @Service
 public class EchoServiceImpl implements EchoService {
 
-    public String echo(String s) {
-        return s;
-    }
+  public String echo(String s) {
+    return s;
+  }
 }

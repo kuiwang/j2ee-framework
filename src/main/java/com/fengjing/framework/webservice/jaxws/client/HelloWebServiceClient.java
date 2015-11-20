@@ -3,46 +3,47 @@ package com.fengjing.framework.webservice.jaxws.client;
 import java.util.List;
 
 /**
- * ÔÚmaven»·¾³ÏÂÖ´ÐÐmvn jaxws:wsimport Éú³Éclient¶Ë´úÂë
+ * ï¿½ï¿½mavenï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½mvn jaxws:wsimport ï¿½ï¿½ï¿½ï¿½clientï¿½Ë´ï¿½ï¿½ï¿½
+ * 
  * @author scott
  *
  */
 public class HelloWebServiceClient {
 
-    public static void main(String[] args)
-    {
-        //To Call webservice you need its service object
-        //then port to call exposed methods.
-        
-    	/**
-         * HelloService hs = new HelloService();
-         * Hello hello = hs.getHelloPort();
-         * hello.sayHello("Sanumala");
-         */
-    	
-        Hello hello = new HelloService().getHelloPort();
-        System.out.println(hello.sayHello("Sanumala"));
-        System.out.println(hello.sayHelloUsingSpring("Github"));
-        
-        List<User> users = hello.getAllUsers();
-        for (User user : users) {
-        	System.out.println(user.getName()+"\t"+user.getAge()+"\t"+user.getAddress()+"\t"+user.getDept().getDeptname());
-		}
-        User user = new User();
-        
-        user.setName("admin");
-        user.setAge(18);
-        user.setAddress("ÉÂÎ÷Î÷°²");
-        
-        Dept dept=new Dept();
-        
-        dept.setDeptid(1);
-        dept.setDeptname("ÑÐ·¢ÖÐÐÄ");
-        
-		user.setDept(dept);
-		
-        User print = hello.print(user);
-        System.out.println("\n"+print.getName()+"\t"+print.getAge()+"\t"+print.getAddress()+"\t"+print.getDept().getDeptname());
-        
+  public static void main(String[] args) {
+    // To Call webservice you need its service object
+    // then port to call exposed methods.
+
+    /**
+     * HelloService hs = new HelloService(); Hello hello = hs.getHelloPort();
+     * hello.sayHello("Sanumala");
+     */
+
+    Hello hello = new HelloService().getHelloPort();
+    System.out.println(hello.sayHello("Sanumala"));
+    System.out.println(hello.sayHelloUsingSpring("Github"));
+
+    List<User> users = hello.getAllUsers();
+    for (User user : users) {
+      System.out.println(user.getName() + "\t" + user.getAge() + "\t" + user.getAddress() + "\t"
+          + user.getDept().getDeptname());
     }
+    User user = new User();
+
+    user.setName("admin");
+    user.setAge(18);
+    user.setAddress("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+
+    Dept dept = new Dept();
+
+    dept.setDeptid(1);
+    dept.setDeptname("ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½");
+
+    user.setDept(dept);
+
+    User print = hello.print(user);
+    System.out.println("\n" + print.getName() + "\t" + print.getAge() + "\t" + print.getAddress()
+        + "\t" + print.getDept().getDeptname());
+
+  }
 }

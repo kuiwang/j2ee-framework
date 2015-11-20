@@ -17,8 +17,7 @@ import com.fengjing.framework.springmvc.form.handling.model.Customer;
 
 /**
  * SpringMVC form handling controller
- * �����ַhttp://localhost:8080/maven-framework/springmvcformcustomer.do
- * �ο�spring-mvc-servlet.xml
+ * �����ַhttp://localhost:8080/maven-framework/springmvcformcustomer.do �ο�spring-mvc-servlet.xml
  * 
  * @author scott
  *
@@ -26,79 +25,79 @@ import com.fengjing.framework.springmvc.form.handling.model.Customer;
 @SuppressWarnings("deprecation")
 public class SpringMVCformCustomerController extends SimpleFormController {
 
-    public SpringMVCformCustomerController() {
-        setCommandClass(Customer.class);
-        setCommandName("customer");
-    }
+  public SpringMVCformCustomerController() {
+    setCommandClass(Customer.class);
+    setCommandName("customer");
+  }
 
-    @Override
-    protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response,
-            Object command, BindException errors) throws Exception {
+  @Override
+  protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response,
+      Object command, BindException errors) throws Exception {
 
-        Customer customer = (Customer) command;
-        System.out.println(customer);
-        return new ModelAndView("CustomerSuccess", "customer", customer);
+    Customer customer = (Customer) command;
+    System.out.println(customer);
+    return new ModelAndView("CustomerSuccess", "customer", customer);
 
-    }
+  }
 
-    @Override
-    protected Object formBackingObject(HttpServletRequest request) throws Exception {
+  @Override
+  protected Object formBackingObject(HttpServletRequest request) throws Exception {
 
-        Customer cust = new Customer();
-        //Make "Spring MVC" as default checked value
-        cust.setFavFramework(new String[] { "Spring MVC" });
+    Customer cust = new Customer();
+    // Make "Spring MVC" as default checked value
+    cust.setFavFramework(new String[] {"Spring MVC"});
 
-        //Make "Make" as default radio button selected value
-        cust.setSex("M");
+    // Make "Make" as default radio button selected value
+    cust.setSex("M");
 
-        //make "Hibernate" as the default java skills selection
-        cust.setJavaSkills("Hibernate");
+    // make "Hibernate" as the default java skills selection
+    cust.setJavaSkills("Hibernate");
 
-        //initilize a hidden value
-        cust.setSecretValue("I'm hidden value");
+    // initilize a hidden value
+    cust.setSecretValue("I'm hidden value");
 
-        return cust;
-    }
+    return cust;
+  }
 
-    @Override
-    protected Map referenceData(HttpServletRequest request) throws Exception {
+  @Override
+  protected Map referenceData(HttpServletRequest request) throws Exception {
 
-        Map referenceData = new HashMap();
+    Map referenceData = new HashMap();
 
-        //Data referencing for web framework checkboxes
-        List<String> webFrameworkList = new ArrayList<String>();
-        webFrameworkList.add("Spring MVC");
-        webFrameworkList.add("Struts 1");
-        webFrameworkList.add("Struts 2");
-        webFrameworkList.add("JSF");
-        webFrameworkList.add("Apache Wicket");
-        referenceData.put("webFrameworkList", webFrameworkList);
+    // Data referencing for web framework checkboxes
+    List<String> webFrameworkList = new ArrayList<String>();
+    webFrameworkList.add("Spring MVC");
+    webFrameworkList.add("Struts 1");
+    webFrameworkList.add("Struts 2");
+    webFrameworkList.add("JSF");
+    webFrameworkList.add("Apache Wicket");
+    referenceData.put("webFrameworkList", webFrameworkList);
 
-        //Data referencing for number radiobuttons
-        List<String> numberList = new ArrayList<String>();
-        numberList.add("Number 1");
-        numberList.add("Number 2");
-        numberList.add("Number 3");
-        numberList.add("Number 4");
-        numberList.add("Number 5");
-        referenceData.put("numberList", numberList);
+    // Data referencing for number radiobuttons
+    List<String> numberList = new ArrayList<String>();
+    numberList.add("Number 1");
+    numberList.add("Number 2");
+    numberList.add("Number 3");
+    numberList.add("Number 4");
+    numberList.add("Number 5");
+    referenceData.put("numberList", numberList);
 
-        //Data referencing for country dropdown box
-        Map<String, String> country = new LinkedHashMap<String, String>();
-        country.put("US", "United Stated");
-        country.put("CHINA", "China");
-        country.put("SG", "Singapore");
-        country.put("MY", "Malaysia");
-        referenceData.put("countryList", country);
+    // Data referencing for country dropdown box
+    Map<String, String> country = new LinkedHashMap<String, String>();
+    country.put("US", "United Stated");
+    country.put("CHINA", "China");
+    country.put("SG", "Singapore");
+    country.put("MY", "Malaysia");
+    referenceData.put("countryList", country);
 
-        //Data referencing for java skills list box
-        Map<String, String> javaSkill = new LinkedHashMap<String, String>();
-        javaSkill.put("Hibernate", "Hibernate");
-        javaSkill.put("Spring", "Spring");
-        javaSkill.put("Apache Wicket", "Apache Wicket");
-        javaSkill.put("Struts", "Struts");
-        referenceData.put("javaSkillsList", javaSkill);
+    // Data referencing for java skills list box
+    Map<String, String> javaSkill = new LinkedHashMap<String, String>();
+    javaSkill.put("Hibernate", "Hibernate");
+    javaSkill.put("Spring", "Spring");
+    javaSkill.put("Apache Wicket", "Apache Wicket");
+    javaSkill.put("Struts", "Struts");
+    referenceData.put("javaSkillsList", javaSkill);
 
-        return referenceData;
-    }
+    return referenceData;
+  }
 }

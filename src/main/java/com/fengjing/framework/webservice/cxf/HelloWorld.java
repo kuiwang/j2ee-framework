@@ -8,8 +8,8 @@ import javax.jws.WebService;
 @WebService
 public interface HelloWorld {
 
-    @WebMethod(operationName = "sayHi")
-    @WebResult(name = "returnValue")
-    public String sayHi(@WebParam(name = "name") String text);
+  @WebMethod(operationName = "sayHi")
+  @WebResult(name = "returnValue")
+  public String sayHi(@WebParam(name = "name") String text);
 
 }

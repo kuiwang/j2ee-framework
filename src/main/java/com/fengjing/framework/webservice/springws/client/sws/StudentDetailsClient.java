@@ -11,34 +11,33 @@ import org.springframework.xml.transform.ResourceSource;
 import org.springframework.xml.transform.StringResult;
 
 /**
- * @see http
- *      ://localhost:8080/maven-framework/sws/services/studentDetails.wsdl
+ * @see http ://localhost:8080/maven-framework/sws/services/studentDetails.wsdl
  * @author scott
  *
  */
 public class StudentDetailsClient extends WebServiceGatewaySupport {
 
-    private Resource request;
+  private Resource request;
 
-    public void setRequest(Resource request) {
-        this.request = request;
-    }
+  public void setRequest(Resource request) {
+    this.request = request;
+  }
 
-    public void echo() throws IOException {
-        Source requestSource = new ResourceSource(request);
-        StringResult result = new StringResult();
-        getWebServiceTemplate().sendSourceAndReceiveToResult(requestSource, result);
-        System.out.println();
-        System.out.println(result);
-        System.out.println();
-    }
+  public void echo() throws IOException {
+    Source requestSource = new ResourceSource(request);
+    StringResult result = new StringResult();
+    getWebServiceTemplate().sendSourceAndReceiveToResult(requestSource, result);
+    System.out.println();
+    System.out.println(result);
+    System.out.println();
+  }
 
-    public static void main(String[] args) throws IOException {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-                "applicationContext.xml", StudentDetailsClient.class);
-        StudentDetailsClient studentDetailsClient = (StudentDetailsClient) applicationContext
-                .getBean("studentDetailsClient");
-        studentDetailsClient.echo();
-    }
+  public static void main(String[] args) throws IOException {
+    ApplicationContext applicationContext =
+        new ClassPathXmlApplicationContext("applicationContext.xml", StudentDetailsClient.class);
+    StudentDetailsClient studentDetailsClient =
+        (StudentDetailsClient) applicationContext.getBean("studentDetailsClient");
+    studentDetailsClient.echo();
+  }
 
 }

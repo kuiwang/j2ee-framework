@@ -15,40 +15,40 @@ import java.io.StringWriter;
  */
 public class Exceptions {
 
-    /**
-     * ��CheckedExceptionת��ΪUncheckedException.
-     */
-    public static RuntimeException unchecked(Exception e) {
-        if (e instanceof RuntimeException) {
-            return (RuntimeException) e;
-        } else {
-            return new RuntimeException(e);
-        }
+  /**
+   * ��CheckedExceptionת��ΪUncheckedException.
+   */
+  public static RuntimeException unchecked(Exception e) {
+    if (e instanceof RuntimeException) {
+      return (RuntimeException) e;
+    } else {
+      return new RuntimeException(e);
     }
+  }
 
-    /**
-     * ��ErrorStackת��ΪString.
-     */
-    public static String getStackTraceAsString(Exception e) {
-        StringWriter stringWriter = new StringWriter();
-        e.printStackTrace(new PrintWriter(stringWriter));
-        return stringWriter.toString();
-    }
+  /**
+   * ��ErrorStackת��ΪString.
+   */
+  public static String getStackTraceAsString(Exception e) {
+    StringWriter stringWriter = new StringWriter();
+    e.printStackTrace(new PrintWriter(stringWriter));
+    return stringWriter.toString();
+  }
 
-    /**
-     * �ж��쳣�Ƿ���ĳЩ�ײ���쳣����.
-     */
-    public static boolean isCausedBy(Exception ex,
-            Class<? extends Exception>... causeExceptionClasses) {
-        Throwable cause = ex.getCause();
-        while (cause != null) {
-            for (Class<? extends Exception> causeClass : causeExceptionClasses) {
-                if (causeClass.isInstance(cause)) {
-                    return true;
-                }
-            }
-            cause = cause.getCause();
+  /**
+   * �ж��쳣�Ƿ���ĳЩ�ײ���쳣����.
+   */
+  public static boolean isCausedBy(Exception ex,
+      Class<? extends Exception>... causeExceptionClasses) {
+    Throwable cause = ex.getCause();
+    while (cause != null) {
+      for (Class<? extends Exception> causeClass : causeExceptionClasses) {
+        if (causeClass.isInstance(cause)) {
+          return true;
         }
-        return false;
+      }
+      cause = cause.getCause();
     }
+    return false;
+  }
 }

@@ -10,10 +10,10 @@ import com.fengjing.framework.webservice.cxf.HelloWorld;
 @WebService(endpointInterface = "com.fengjing.framework.webservice.cxf.HelloWorld")
 public class HelloWorldImpl implements HelloWorld {
 
-    @WebMethod(operationName = "sayHi")
-    @WebResult(name = "returnValue")
-    public String sayHi(@WebParam(name = "name") String text) {
-        System.out.println("sayHi called");
-        return "Hello " + text;
-    }
+  @WebMethod(operationName = "sayHi")
+  @WebResult(name = "returnValue")
+  public String sayHi(@WebParam(name = "name") String text) {
+    System.out.println("sayHi called");
+    return "Hello " + text;
+  }
 }

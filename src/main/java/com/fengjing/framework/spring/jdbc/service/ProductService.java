@@ -7,6 +7,6 @@ import com.fengjing.framework.spring.jdbc.model.Product;
 
 public interface ProductService extends IService<Product> {
 
-	List<Product> getProductListByCategory(String string);
+  List<Product> getProductListByCategory(String string);
 
 }

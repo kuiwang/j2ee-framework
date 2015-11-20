@@ -11,37 +11,38 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fengjing.framework.springmvc.model.SampleContent;
 
 /**
- * ·µ»ØRSS¸ñÊ½µÄÊÓÍ¼
+ * ï¿½ï¿½ï¿½ï¿½RSSï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Í¼
+ * 
  * @author fengjing
  *
  */
 @Controller
 public class ResponseRssController {
-	
-	@RequestMapping(value="/rss")
-	public ModelAndView rss(){
-		
-		List<SampleContent> items = new ArrayList<SampleContent>();
-		 
-		SampleContent content  = new SampleContent();
-		content.setTitle("Spring MVC Tutorial 1");
-		content.setUrl("http://www.mkyong.com/spring-mvc/tutorial-1");
-		content.setSummary("Tutorial 1 summary ...");
-		content.setCreatedDate(new Date());
-		items.add(content);
- 
-		SampleContent content2  = new SampleContent();
-		content2.setTitle("Spring MVC Tutorial 2");
-		content2.setUrl("http://www.mkyong.com/spring-mvc/tutorial-2");
-		content2.setSummary("Tutorial 2 summary ...");
-		content2.setCreatedDate(new Date());
-		items.add(content2);
- 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("rssViewer");
-		mav.addObject("feedContent", items);
- 
-		return mav;
- 
-	}
+
+  @RequestMapping(value = "/rss")
+  public ModelAndView rss() {
+
+    List<SampleContent> items = new ArrayList<SampleContent>();
+
+    SampleContent content = new SampleContent();
+    content.setTitle("Spring MVC Tutorial 1");
+    content.setUrl("http://www.mkyong.com/spring-mvc/tutorial-1");
+    content.setSummary("Tutorial 1 summary ...");
+    content.setCreatedDate(new Date());
+    items.add(content);
+
+    SampleContent content2 = new SampleContent();
+    content2.setTitle("Spring MVC Tutorial 2");
+    content2.setUrl("http://www.mkyong.com/spring-mvc/tutorial-2");
+    content2.setSummary("Tutorial 2 summary ...");
+    content2.setCreatedDate(new Date());
+    items.add(content2);
+
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("rssViewer");
+    mav.addObject("feedContent", items);
+
+    return mav;
+
+  }
 }

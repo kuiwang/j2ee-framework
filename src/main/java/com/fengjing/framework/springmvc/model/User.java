@@ -18,46 +18,46 @@ import javax.validation.constraints.NotNull;
 @NamedQuery(name = "findUserById", query = " from User a where a.id=?1 ")
 public class User {
 
-    private int id;
+  private int id;
 
-    private String username;
+  private String username;
 
-    private Dept dept;
+  private Dept dept;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
-        return id;
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    @Column(unique = true)
-    @NotNull
-    public String getUsername() {
-        return username;
-    }
+  @Column(unique = true)
+  @NotNull
+  public String getUsername() {
+    return username;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "deptid", nullable = false)
-    public Dept getDept() {
-        return dept;
-    }
+  @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "deptid", nullable = false)
+  public Dept getDept() {
+    return dept;
+  }
 
-    public void setDept(Dept dept) {
-        this.dept = dept;
-    }
+  public void setDept(Dept dept) {
+    this.dept = dept;
+  }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", deptid=" + dept.getId()
-                + ", deptname=" + dept.getDeptname() + "]";
-    }
+  @Override
+  public String toString() {
+    return "User [id=" + id + ", username=" + username + ", deptid=" + dept.getId() + ", deptname="
+        + dept.getDeptname() + "]";
+  }
 
 }

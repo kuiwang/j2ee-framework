@@ -17,13 +17,13 @@ import org.springframework.web.servlet.mvc.AbstractController;
 @Controller
 public class ExceptionController extends AbstractController {
 
-    @Override
-    @RequestMapping("exception")
-    protected ModelAndView handleRequestInternal(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+  @Override
+  @RequestMapping("exception")
+  protected ModelAndView handleRequestInternal(HttpServletRequest request,
+      HttpServletResponse response) throws Exception {
 
-        throw new GenericException("Oppss...System error, please visit it later");
+    throw new GenericException("Oppss...System error, please visit it later");
 
-    }
+  }
 
 }

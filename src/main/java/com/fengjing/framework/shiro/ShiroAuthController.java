@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springside.modules.utils.Exceptions;
 
 /**
- * ShiroAuthController����򿪵�¼ҳ��(GET����)�͵�¼����ҳ��(POST����)
- * ������¼��POST������Filter���
+ * ShiroAuthController����򿪵�¼ҳ��(GET����)�͵�¼����ҳ��(POST����) ������¼��POST������Filter���
  * 
  * @author scott
  *
@@ -29,74 +28,80 @@ import org.springside.modules.utils.Exceptions;
 @RequestMapping(value = "/shiro")
 public class ShiroAuthController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ShiroAuthController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ShiroAuthController.class);
 
-    private static final String LOGIN_PAGE = "shiro/login";
+  private static final String LOGIN_PAGE = "shiro/login";
 
-    private static final String unauthorizedUrl = "error/401";
+  private static final String unauthorizedUrl = "error/401";
 
-    /**
-     * ����򿪵�¼ҳ��
-     * 
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(HttpServletRequest request) {
-        return LOGIN_PAGE;
+  /**
+   * ����򿪵�¼ҳ��
+   * 
+   * @param request
+   * @return
+   */
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public String login(HttpServletRequest request) {
+    return LOGIN_PAGE;
+  }
+
+  /**
+   * �����δ��Ȩҳ��
+   * 
+   * @param request
+   * @return
+   */
+  @RequestMapping(value = "/unauthorized")
+  public String unauthorized(HttpServletRequest request) {
+    return unauthorizedUrl;
+  }
+
+  /**
+   * ��¼����ҳ��(POST����)
+   * 
+   * @param username
+   * @param model
+   * @param request
+   * @return
+   */
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  public String fail(
+      @RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String username, Model model,
+      HttpServletRequest request) {
+    String msg = parseException(request);
+    model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, msg);
+    model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, username);
+    return LOGIN_PAGE;
+  }
+
+  private String parseException(HttpServletRequest request) {
+    String errorString =
+        (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+    Class<?> error = null;
+    try {
+      if (errorString != null) {
+        error = Class.forName(errorString);
+      }
+    } catch (ClassNotFoundException e) {
+      LOG.error(Exceptions.getStackTraceAsString(e));
     }
 
-    /**
-     * �����δ��Ȩҳ��
-     * 
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/unauthorized")
-    public String unauthorized(HttpServletRequest request) {
-        return unauthorizedUrl;
+    String msg = "δ֪����";
+    if (error != null) {
+      if (error.equals(AccountException.class))
+        msg = "�ʺŲ����ڣ�";
+      else if (error.equals(UnknownAccountException.class))
+        msg = "�ʺŲ����ڣ�";
+      else if (error.equals(IncorrectCredentialsException.class))
+        msg = "�������";
+      else if (error.equals(IncorrectCaptchaException.class))
+        msg = "��֤�����";
+      else if (error.equals(AuthenticationException.class))
+        msg = "��֤ʧ�ܣ�";
+      else if (error.equals(DisabledAccountException.class))
+        msg = "�˺ű����ᣡ";
     }
-
-    /**
-     * ��¼����ҳ��(POST����)
-     * 
-     * @param username
-     * @param model
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String fail(
-            @RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String username,
-            Model model, HttpServletRequest request) {
-        String msg = parseException(request);
-        model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, msg);
-        model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, username);
-        return LOGIN_PAGE;
-    }
-
-    private String parseException(HttpServletRequest request) {
-        String errorString = (String) request
-                .getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-        Class<?> error = null;
-        try {
-            if (errorString != null) {
-                error = Class.forName(errorString);
-            }
-        } catch (ClassNotFoundException e) {
-            LOG.error(Exceptions.getStackTraceAsString(e));
-        }
-
-        String msg = "δ֪����";
-        if (error != null) {
-            if (error.equals(AccountException.class)) msg = "�ʺŲ����ڣ�";
-            else if (error.equals(UnknownAccountException.class)) msg = "�ʺŲ����ڣ�";
-            else if (error.equals(IncorrectCredentialsException.class)) msg = "�������";
-            else if (error.equals(IncorrectCaptchaException.class)) msg = "��֤�����";
-            else if (error.equals(AuthenticationException.class)) msg = "��֤ʧ�ܣ�";
-            else if (error.equals(DisabledAccountException.class)) msg = "�˺ű����ᣡ";
-        }
-        return "��¼ʧ�ܣ�" + msg;
-    }
+    return "��¼ʧ�ܣ�" + msg;
+  }
 
 }

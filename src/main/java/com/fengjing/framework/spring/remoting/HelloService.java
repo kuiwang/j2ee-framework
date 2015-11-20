@@ -2,8 +2,8 @@ package com.fengjing.framework.spring.remoting;
 
 public interface HelloService {
 
-    String sayHello(String name);
+  String sayHello(String name);
 
-    User modify(User user);
+  User modify(User user);
 
 }

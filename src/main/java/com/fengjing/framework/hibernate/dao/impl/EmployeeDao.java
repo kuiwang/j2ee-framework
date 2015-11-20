@@ -13,37 +13,37 @@ import com.fengjing.framework.hibernate.model.Employee;
 @Repository(value = "employeeDaoHibernate4")
 public class EmployeeDao implements IDao<Employee> {
 
-    private SessionFactory sessionFactory;
+  private SessionFactory sessionFactory;
 
-    @Resource(name = "hibernate4sessionFactory")
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+  @Resource(name = "hibernate4sessionFactory")
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
 
-    @Override
-    public void add(Object object) {
-        this.sessionFactory.getCurrentSession().save(object);
-    }
+  @Override
+  public void add(Object object) {
+    this.sessionFactory.getCurrentSession().save(object);
+  }
 
-    @Override
-    public void delete(int id) {
-        this.sessionFactory.getCurrentSession().delete(findById(id));
-    }
+  @Override
+  public void delete(int id) {
+    this.sessionFactory.getCurrentSession().delete(findById(id));
+  }
 
-    @Override
-    public void update(Object object) {
-        this.sessionFactory.getCurrentSession().update(object);
-    }
+  @Override
+  public void update(Object object) {
+    this.sessionFactory.getCurrentSession().update(object);
+  }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Employee> query(String queryString) {
-        return this.sessionFactory.getCurrentSession().createQuery(queryString).list();
-    }
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Employee> query(String queryString) {
+    return this.sessionFactory.getCurrentSession().createQuery(queryString).list();
+  }
 
-    @Override
-    public Employee findById(int id) {
-        return (Employee) this.sessionFactory.getCurrentSession().get(Employee.class, id);
-    }
+  @Override
+  public Employee findById(int id) {
+    return (Employee) this.sessionFactory.getCurrentSession().get(Employee.class, id);
+  }
 
 }

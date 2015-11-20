@@ -13,27 +13,27 @@ import com.fengjing.framework.mybatis.model.Product;
 @Service(value = "myBatisProductService")
 public class ProductService {
 
-    @Autowired
-    private ProductMapper productMapper;
+  @Autowired
+  private ProductMapper productMapper;
 
-    List<Product> getProductListByCategory(String categoryId) {
-        return productMapper.getProductListByCategory(categoryId);
-    }
+  List<Product> getProductListByCategory(String categoryId) {
+    return productMapper.getProductListByCategory(categoryId);
+  }
 
-    Product getProduct(String productId) {
-        return productMapper.getProduct(productId);
-    }
+  Product getProduct(String productId) {
+    return productMapper.getProduct(productId);
+  }
 
-    List<Product> searchProductList(String keywords) {
-        return productMapper.searchProductList("%" + keywords + "%");
-    }
+  List<Product> searchProductList(String keywords) {
+    return productMapper.searchProductList("%" + keywords + "%");
+  }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    void save(Product product) {
-        productMapper.save(product);
-    }
+  @Transactional(propagation = Propagation.REQUIRED)
+  void save(Product product) {
+    productMapper.save(product);
+  }
 
-    List<Product> listAll() {
-        return productMapper.listAllProduct();
-    }
+  List<Product> listAll() {
+    return productMapper.listAllProduct();
+  }
 }

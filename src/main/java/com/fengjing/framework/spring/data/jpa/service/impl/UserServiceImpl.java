@@ -10,72 +10,73 @@ import com.fengjing.framework.spring.data.jpa.repository.UserRepository;
 import com.fengjing.framework.spring.data.jpa.service.UserService;
 import com.fengjing.framework.springmvc.model.User;
 
-@Service(value="userServiceImpl")
+@Service(value = "userServiceImpl")
 @Transactional
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	UserRepository repository;
-	
-	@Override
-	public User findUserById(int id) {
-		return repository.findUserById(id);
-	}
+  @Autowired
+  UserRepository repository;
 
-	@Override
-	public User save(User user) {
-		return repository.save(user);
-	}
+  @Override
+  public User findUserById(int id) {
+    return repository.findUserById(id);
+  }
 
-	@Override
-	public User modifyUser(User user) {
-		return repository.save(user);
-	}
+  @Override
+  public User save(User user) {
+    return repository.save(user);
+  }
 
-	@Override
-	public void delete(User user) {
-		repository.delete(user);
-	}
+  @Override
+  public User modifyUser(User user) {
+    return repository.save(user);
+  }
 
-	@Override
-	public void delete(int id) {
-		repository.delete(id);
-	}
+  @Override
+  public void delete(User user) {
+    repository.delete(user);
+  }
 
-	@Override
-	public int modifyById(String username,int id) {
-		return repository.modifyById(username,id);
-	}
+  @Override
+  public void delete(int id) {
+    repository.delete(id);
+  }
 
-	@Override
-	public List<User> findByUsernameLike(String username) {
-		return repository.findByUsernameLike("%"+username+"%");
-	}
+  @Override
+  public int modifyById(String username, int id) {
+    return repository.modifyById(username, id);
+  }
 
-	@Override
-	public List<User> findByIdLessThan(int id) {
-		return repository.findByIdLessThan(id);
-	}
+  @Override
+  public List<User> findByUsernameLike(String username) {
+    return repository.findByUsernameLike("%" + username + "%");
+  }
 
-	/**
-	 * ¸ù¾Ýusername²éÑ¯ ²¢°´id½µÐòÅÅÁÐ
-	 * @param username
-	 * @return
-	 */
-	@Override
-	public List<User> findByUsernameLikeOrderByIdDesc(String username) {
-		return repository.findByUsernameLikeOrderByIdDesc("%"+username+"%");
-	}
+  @Override
+  public List<User> findByIdLessThan(int id) {
+    return repository.findByIdLessThan(id);
+  }
 
-	@Override
-	public List<User> findByIdBetween(int i, int j) {
-		return repository.findByIdBetween(i, j);
-	}
+  /**
+   * ï¿½ï¿½ï¿½ï¿½usernameï¿½ï¿½Ñ¯ ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   * 
+   * @param username
+   * @return
+   */
+  @Override
+  public List<User> findByUsernameLikeOrderByIdDesc(String username) {
+    return repository.findByUsernameLikeOrderByIdDesc("%" + username + "%");
+  }
 
-	@Override
-	public List<User> findUserByDeptId(int deptid) {
-		return repository.findUserByDeptId(deptid);
-	}
+  @Override
+  public List<User> findByIdBetween(int i, int j) {
+    return repository.findByIdBetween(i, j);
+  }
+
+  @Override
+  public List<User> findUserByDeptId(int deptid) {
+    return repository.findUserByDeptId(deptid);
+  }
 
 
 }

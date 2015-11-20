@@ -11,48 +11,50 @@ import org.springframework.stereotype.Repository;
 import com.fengjing.framework.spring.jdbc.dao.CategoryDao;
 import com.fengjing.framework.spring.jdbc.model.Category;
 
-@Repository(value="jdbcCategoryDaoImpl")
-public class CategoryDaoImpl implements CategoryDao{
+@Repository(value = "jdbcCategoryDaoImpl")
+public class CategoryDaoImpl implements CategoryDao {
 
-	private JdbcTemplate jdbcTemplate;
-	
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
-	
-	@Resource(name="jdbcTemplate")
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+  private JdbcTemplate jdbcTemplate;
 
-	@Override
-	public Category findById(long id) {
-		return getJdbcTemplate().queryForObject("select * from category where id = ? ",new Long[]{id}, Category.class);
-	}
+  public JdbcTemplate getJdbcTemplate() {
+    return jdbcTemplate;
+  }
 
-	@Override
-	public void modify(Category t) {
-		getJdbcTemplate().update("update category set name =? where id =? ", new Object[]{t.getName(),t.getId()}, new int[]{Types.VARCHAR,Types.INTEGER});
-	}
+  @Resource(name = "jdbcTemplate")
+  public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
+  }
 
-	@Override
-	public void save(Category t) {
-		getJdbcTemplate().update("insert into category(name) values(?)", new Object[]{t.getName()});
-	}
+  @Override
+  public Category findById(long id) {
+    return getJdbcTemplate().queryForObject("select * from category where id = ? ",
+        new Long[] {id}, Category.class);
+  }
 
-	@Override
-	public void deleteById(long id) {
-		getJdbcTemplate().update("delete from category where id= ? ",new Object[]{id});
-	}
+  @Override
+  public void modify(Category t) {
+    getJdbcTemplate().update("update category set name =? where id =? ",
+        new Object[] {t.getName(), t.getId()}, new int[] {Types.VARCHAR, Types.INTEGER});
+  }
 
-	@Override
-	public void delete(Category t) {
-		
-	}
+  @Override
+  public void save(Category t) {
+    getJdbcTemplate().update("insert into category(name) values(?)", new Object[] {t.getName()});
+  }
 
-	@Override
-	public List<Category> listAll() {
-		return getJdbcTemplate().queryForList("select * from category",Category.class);
-	}
+  @Override
+  public void deleteById(long id) {
+    getJdbcTemplate().update("delete from category where id= ? ", new Object[] {id});
+  }
+
+  @Override
+  public void delete(Category t) {
+
+  }
+
+  @Override
+  public List<Category> listAll() {
+    return getJdbcTemplate().queryForList("select * from category", Category.class);
+  }
 
 }

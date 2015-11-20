@@ -6,11 +6,11 @@ import com.fengjing.framework.hibernate.model.Employee;
 
 public interface EmployeeService {
 
-    public void add(Object object);
+  public void add(Object object);
 
-    public void delete(int id);
+  public void delete(int id);
 
-    public void update(Object object);
+  public void update(Object object);
 
-    public List<Employee> query(String queryString);
+  public List<Employee> query(String queryString);
 }

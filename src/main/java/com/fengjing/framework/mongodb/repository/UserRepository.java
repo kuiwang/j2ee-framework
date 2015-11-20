@@ -6,5 +6,5 @@ import com.fengjing.framework.mongodb.domain.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
 
-    User findByUsername(String username);
+  User findByUsername(String username);
 }

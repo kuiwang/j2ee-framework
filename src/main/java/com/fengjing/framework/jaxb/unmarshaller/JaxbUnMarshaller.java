@@ -13,23 +13,25 @@ import com.fengjing.framework.jaxb.model.Student;
 
 public class JaxbUnMarshaller {
 
-    @Test
-    public void xml2student() throws JAXBException {
-        String str = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><student><age>18</age><classRoom classroomid=\"classroom\" classroomname=\"�������\"/><stuaddress>��������</stuaddress><stuname>admin</stuname></student>";
+  @Test
+  public void xml2student() throws JAXBException {
+    String str =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><student><age>18</age><classRoom classroomid=\"classroom\" classroomname=\"�������\"/><stuaddress>��������</stuaddress><stuname>admin</stuname></student>";
 
-        JAXBContext context = JAXBContext.newInstance(Student.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        Student student = (Student) unmarshaller.unmarshal(new StringReader(str));
-        System.out.println(student);
-    }
+    JAXBContext context = JAXBContext.newInstance(Student.class);
+    Unmarshaller unmarshaller = context.createUnmarshaller();
+    Student student = (Student) unmarshaller.unmarshal(new StringReader(str));
+    System.out.println(student);
+  }
 
-    @Test
-    public void xml2classroom() throws JAXBException {
-        String str = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><classRoom classroomid=\"classroom\" classroomname=\"�������\"><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student></classRoom>";
-        JAXBContext context = JAXBContext.newInstance(ClassRoom.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        ClassRoom room = (ClassRoom) unmarshaller.unmarshal(new StringReader(str));
-        System.out.println(room);
-    }
+  @Test
+  public void xml2classroom() throws JAXBException {
+    String str =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><classRoom classroomid=\"classroom\" classroomname=\"�������\"><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student><student><age>18</age><stuaddress>��������</stuaddress><stuname>admin</stuname></student></classRoom>";
+    JAXBContext context = JAXBContext.newInstance(ClassRoom.class);
+    Unmarshaller unmarshaller = context.createUnmarshaller();
+    ClassRoom room = (ClassRoom) unmarshaller.unmarshal(new StringReader(str));
+    System.out.println(room);
+  }
 
 }

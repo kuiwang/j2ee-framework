@@ -11,69 +11,80 @@ import com.fengjing.framework.springmvc.model.User;
 
 /**
  * User Spring Data Jpa
+ * 
  * @author fengjing
  *
  */
 public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
-	
-	/**
-	 * ¸Ã·½·¨Êµ¼ÊÉÏÊÇ²éÑ¯com.fengjing.framework.springmvc.model.UserÖÐµÄ @NamedQuery(name="findUserById",query=" from User a where a.id=?1 ")
-	 * @see com.fengjing.framework.springmvc.model.User<br/>@NamedQuery(name="findUserById",query=" from User a where a.id=?1 ")
-	 * @param id
-	 * @return
-	 */
-	User findUserById(int id);
-	
-	/**
-	 * ¸ù¾Ý¸ø¶¨µÄsqlÓï¾äÐÞ¸ÄÓÃ»§
-	 * @param username
-	 * @param id
-	 * @return
-	 */
-	@Modifying
-	@Query(value="update User u set u.username=?1 where u.id=?2 ")
-	int modifyById(String username,int id);
-	
-	/**
-	 * °´ÓÃ»§ÃûÄ£ºý²éÑ¯
-	 * @param username
-	 * @return
-	 */
-	List<User> findByUsernameLike(String username);
-	
-	/**
-	 * ²éÑ¯idÐ¡ÓÚ¼¸µÄÓÃ»§
-	 * @param id
-	 * @return
-	 */
-	List<User> findByIdLessThan(int id);
-	
-	
-	/**
-	 * ¸ù¾ÝusernameÄ£ºý²éÑ¯ ²¢°´id½µÐòÅÅÁÐ
-	 * @param username
-	 * @return
-	 */
-	List<User> findByUsernameLikeOrderByIdDesc(String username);
-	
-	
-	
-	/**
-	 * ¸ù»ùid²éÑ¯  between and
-	 * @param i
-	 * @param j
-	 * @return
-	 */
-	List<User> findByIdBetween(int i,int j);
-	
-	
-	
-	/**
-	 * ¸ù¾Ý²¿ÃÅid²éÑ¯ÓÃ»§ ×¢ÒâÕâÀïµÄ·½·¨ÃûfindUserByDeptId »áÈ¥UserÀàÖÐÕÒÃûÎªdeptµÄÊôÐÔ½Ó×ÅÈ¥deptÀàÀïÃæÈ¥ÕÒid  ÊôÐÔÖ®¼äµÄ¹ØÁª²éÑ¯
-	 * @param deptid
-	 * @return
-	 */
-	@Query(value=" from User user where user.dept.id=:deptid")
-	List<User> findUserByDeptId(@Param("deptid")int deptid);
-	
+
+  /**
+   * ï¿½Ã·ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½Ñ¯com.fengjing.framework.springmvc.model.Userï¿½Ðµï¿½
+   * @NamedQuery(name="findUserById",query=" from User a where a.id=?1 ")
+   * 
+   * @see com.fengjing.framework.springmvc.model.User<br/>
+   *      @NamedQuery(name="findUserById",query=" from User a where a.id=?1 ")
+   * @param id
+   * @return
+   */
+  User findUserById(int id);
+
+  /**
+   * ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½sqlï¿½ï¿½ï¿½ï¿½Þ¸ï¿½ï¿½Ã»ï¿½
+   * 
+   * @param username
+   * @param id
+   * @return
+   */
+  @Modifying
+  @Query(value = "update User u set u.username=?1 where u.id=?2 ")
+  int modifyById(String username, int id);
+
+  /**
+   * ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ñ¯
+   * 
+   * @param username
+   * @return
+   */
+  List<User> findByUsernameLike(String username);
+
+  /**
+   * ï¿½ï¿½Ñ¯idÐ¡ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
+   * 
+   * @param id
+   * @return
+   */
+  List<User> findByIdLessThan(int id);
+
+
+  /**
+   * ï¿½ï¿½ï¿½ï¿½usernameÄ£ï¿½ï¿½ï¿½ï¿½Ñ¯ ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   * 
+   * @param username
+   * @return
+   */
+  List<User> findByUsernameLikeOrderByIdDesc(String username);
+
+
+
+  /**
+   * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½Ñ¯ between and
+   * 
+   * @param i
+   * @param j
+   * @return
+   */
+  List<User> findByIdBetween(int i, int j);
+
+
+
+  /**
+   * ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½idï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ ×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½findUserByDeptId ï¿½ï¿½È¥Userï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªdeptï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½È¥deptï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½id
+   * ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯
+   * 
+   * @param deptid
+   * @return
+   */
+  @Query(value = " from User user where user.dept.id=:deptid")
+  List<User> findUserByDeptId(@Param("deptid") int deptid);
+
 }
